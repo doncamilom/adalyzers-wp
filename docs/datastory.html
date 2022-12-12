@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Wikispeedia: A story of love and betrayal.</title>
+<title>ADAlyzers super cool project - Wikispeedia: An exploration into human strategy through path navigation.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,6 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -102,11 +103,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -120,24 +121,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ADAlyzers super cool project</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wikispeedia-what-the-hell-is-this" id="toc-wikispeedia-what-the-hell-is-this" class="nav-link active" data-scroll-target="#wikispeedia-what-the-hell-is-this">Wikispeedia: What the hell is this?</a></li>
+  <li><a href="#a-look-into-the-collected-data" id="toc-a-look-into-the-collected-data" class="nav-link" data-scroll-target="#a-look-into-the-collected-data">A look into the collected data…</a></li>
+  <li><a href="#data-story" id="toc-data-story" class="nav-link" data-scroll-target="#data-story">Data Story</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Wikispeedia: A story of love and betrayal.</h1>
+<h1 class="title">Wikispeedia: An exploration into human strategy through path navigation.</h1>
 </div>
 
 
@@ -152,26 +189,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>DATA STORY</p>
-<p>Data visualisation</p>
-<p>Data processing</p>
+<hr>
+<section id="wikispeedia-what-the-hell-is-this" class="level2">
+<h2 class="anchored" data-anchor-id="wikispeedia-what-the-hell-is-this">Wikispeedia: What the hell is this?</h2>
+<p><a href="https://dlab.epfl.ch/wikispeedia/play/">Wikispeedia</a> is an easy and fun game: You are given two Wikipedia articles, and starting from the first article, your goal is to reach the second one exclusively by following links in the articles you encounter. This game was created by <a href="https://dlab.epfl.ch/">The EPFL Data Science Lab</a> to gather data.</p>
+<p>Using this data, we ask ourselves, are there patterns in the way players navigate the network, that make them more successful? That is, are there any optimal strategy that doesn’t require extensive knowledge of the network?</p>
+<p>Players are faced with multiple stimulae during the playing session, and players’ decisions as well as their posterior success may be influenced by them. For example, users might navigate the network through <code>semantic similarity</code> optimization, or they might just click the links found in <code>images</code> or <code>tables</code>, etc.</p>
+<p>Do these particular features have any effect on players’ success? Let’s see!</p>
+<hr>
+</section>
+<section id="a-look-into-the-collected-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-look-into-the-collected-data">A look into the collected data…</h2>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>parent_folder_path <span class="op">=</span> <span class="st">'.data/wikispeedia_paths-and-graph/'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>paths_finished_df<span class="op">=</span>(pd.read_csv(os.path.join(parent_folder_path, <span class="st">'paths_finished.tsv'</span>), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                               sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, skiprows<span class="op">=</span><span class="dv">15</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                   .rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"ip"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="dv">1</span>:<span class="st">"timestamp"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="dv">2</span>:<span class="st">"duration"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="dv">3</span>:<span class="st">"path"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="dv">4</span>:<span class="st">"rating"</span>}))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>paths_unfinished_df<span class="op">=</span>(pd.read_csv(os.path.join(parent_folder_path, <span class="st">'paths_unfinished.tsv'</span>), </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                               sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, skiprows<span class="op">=</span><span class="dv">16</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                     .rename(columns<span class="op">=</span>{<span class="dv">0</span>:<span class="st">"ip"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">1</span>:<span class="st">"timestamp"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">2</span>:<span class="st">"duration"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">3</span>:<span class="st">"path"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">4</span>:<span class="st">"target"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">5</span>:<span class="st">"type"</span>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>paths_finished_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ip</th>
+      <th>timestamp</th>
+      <th>duration</th>
+      <th>path</th>
+      <th>rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6a3701d319fc3754</td>
+      <td>1297740409</td>
+      <td>166</td>
+      <td>14th_century;15th_century;16th_century;Pacific...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3824310e536af032</td>
+      <td>1344753412</td>
+      <td>88</td>
+      <td>14th_century;Europe;Africa;Atlantic_slave_trad...</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>415612e93584d30e</td>
+      <td>1349298640</td>
+      <td>138</td>
+      <td>14th_century;Niger;Nigeria;British_Empire;Slav...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>64dd5cd342e3780c</td>
+      <td>1265613925</td>
+      <td>37</td>
+      <td>14th_century;Renaissance;Ancient_Greece;Greece</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>015245d773376aab</td>
+      <td>1366730828</td>
+      <td>175</td>
+      <td>14th_century;Italy;Roman_Catholic_Church;HIV;R...</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="data-story" class="level1">
+<h1>Data Story</h1>
+<ul>
+<li><p>Data visualisation</p></li>
+<li><p>Data processing</p></li>
+</ul>
 <p>The methodology chosen for the data processing step is to perform a matched analysis (allowing to obtain actually comparable data) aimed at testing if specific human game strategies lead to success in the Wikispeedia game. A logistic regression is conducted with the goal of estimating the parameters of the logistic model with the dependent binary variable being the success (or not success) and the independent variables being sequentially extracted the following set of features (different human behaviors/choices when playing the Wikispeedia game): 1. Positioning of the clicked hyperlinks; 2. Clicking hyperlinks in images’ captions; 3. Sequentially increasing semantic similarity with the target article along the path; 4. Degree of flow of hyperlinks clicked along the path. Several confounders may affect the outcome of the regression analysis i.e.&nbsp;of the potentially found correlation between the aforementioned features and success. To mention a few, the “difficulty” of the randomly assigned task (source and target articles) to players, affects their successfulness together with the strategy adopted to address it. This “difficulty” could be naively measured by shortest path distance between the source and target article in the Wikispeedia hyperlinks graph (calculated with the Floyd-Warshall algorithm). Additionally the actual sequence of clicked hyperlinks (qualitative feature, w.r.t. semantics) and their numerosity along a path (quantitative feature) again reasonably affects players successfulness and their choice for a strategy.<br>
 In order to remove the aforementioned confounders, the dataset is filtered accordingly with the assumptions made. Players are matched on same human path length performed and same shortest path distance of the assigned task, with the “treated subject” being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the “controlled subject” being the user performing the respective opposite strategy (e.g.&nbsp;clicking less frequently than the average on hyperlinks showing up in images’ captions). The analysis challenge can be reformulated as follows: “given an equally difficult task assigned and having a fixed number of possible choices to perform, are players more successful if they adopt a specific strategy?”</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  subplot_kw <span class="op">=</span> {<span class="st">'projection'</span>: <span class="st">'polar'</span>} </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  subplot_kw <span class="op">=</span> {<span class="st">'projection'</span>: <span class="st">'polar'</span>} </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-polar" class="quarto-figure quarto-figure-center anchored">
@@ -184,6 +328,7 @@ In order to remove the aforementioned confounders, the dataset is filtered accor
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

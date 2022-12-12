@@ -1,0 +1,15 @@
+---
+title: "About"
+image: images/dlab.svg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    # (additional links excluded for brevity)
+---
+
+## About this blog
+
+The ADAlyzers is a non-profit founded by 3 amazing students at EPFL.

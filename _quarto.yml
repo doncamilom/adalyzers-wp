@@ -1,3 +1,15 @@
 project:
     type: website
     output-dir: docs
+
+website:
+    title: ADAlyzers super cool project
+    navbar:
+      left:
+        - href: about.qmd
+          text: About
+
+format:
+  html:
+    theme: pulse
+    toc: true
