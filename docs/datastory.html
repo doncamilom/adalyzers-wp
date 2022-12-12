@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quarto Basics</title>
+<title>Wikispeedia: A story of love and betrayal.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quarto Basics</h1>
+<h1 class="title">Wikispeedia: A story of love and betrayal.</h1>
 </div>
 
 
@@ -152,9 +152,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="polar-axis" class="level2">
-<h2 class="anchored" data-anchor-id="polar-axis">Polar Axis</h2>
-<p>For a demonstration of a line plot on a polar axis, see <a href="#fig-polar">Figure&nbsp;1</a>.</p>
+<p>DATA STORY</p>
+<p>Data visualisation</p>
+<p>Data processing</p>
+<p>The methodology chosen for the data processing step is to perform a matched analysis (allowing to obtain actually comparable data) aimed at testing if specific human game strategies lead to success in the Wikispeedia game. A logistic regression is conducted with the goal of estimating the parameters of the logistic model with the dependent binary variable being the success (or not success) and the independent variables being sequentially extracted the following set of features (different human behaviors/choices when playing the Wikispeedia game): 1. Positioning of the clicked hyperlinks; 2. Clicking hyperlinks in images’ captions; 3. Sequentially increasing semantic similarity with the target article along the path; 4. Degree of flow of hyperlinks clicked along the path. Several confounders may affect the outcome of the regression analysis i.e.&nbsp;of the potentially found correlation between the aforementioned features and success. To mention a few, the “difficulty” of the randomly assigned task (source and target articles) to players, affects their successfulness together with the strategy adopted to address it. This “difficulty” could be naively measured by shortest path distance between the source and target article in the Wikispeedia hyperlinks graph (calculated with the Floyd-Warshall algorithm). Additionally the actual sequence of clicked hyperlinks (qualitative feature, w.r.t. semantics) and their numerosity along a path (quantitative feature) again reasonably affects players successfulness and their choice for a strategy.<br>
+In order to remove the aforementioned confounders, the dataset is filtered accordingly with the assumptions made. Players are matched on same human path length performed and same shortest path distance of the assigned task, with the “treated subject” being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the “controlled subject” being the user performing the respective opposite strategy (e.g.&nbsp;clicking less frequently than the average on hyperlinks showing up in images’ captions). The analysis challenge can be reformulated as follows: “given an equally difficult task assigned and having a fixed number of possible choices to perform, are players more successful if they adopt a specific strategy?”</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -174,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-display">
 <div id="fig-polar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="hello_files/figure-html/fig-polar-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="datastory_files/figure-html/fig-polar-output-1.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1: A line plot on a polar axis</figcaption><p></p>
 </figure>
 </div>
@@ -182,7 +184,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
