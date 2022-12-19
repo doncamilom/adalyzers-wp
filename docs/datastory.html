@@ -125,6 +125,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -168,17 +169,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#players-as-humans" id="toc-players-as-humans" class="nav-link" data-scroll-target="#players-as-humans">Players as humans</a>
   <ul class="collapse">
   <li><a href="#strategies-and-attitudes" id="toc-strategies-and-attitudes" class="nav-link" data-scroll-target="#strategies-and-attitudes">Strategies and attitudes</a></li>
-  <li><a href="#jeffs-plots" id="toc-jeffs-plots" class="nav-link" data-scroll-target="#jeffs-plots">JEFF’s PLOTS</a></li>
+  <li><a href="#semantic-similarity-the-paths-that-make-sense." id="toc-semantic-similarity-the-paths-that-make-sense." class="nav-link" data-scroll-target="#semantic-similarity-the-paths-that-make-sense.">Semantic similarity: The paths that ‘make sense’.</a></li>
   </ul></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <li><a href="#a-matching-study" id="toc-a-matching-study" class="nav-link" data-scroll-target="#a-matching-study">A matching study</a>
   <ul class="collapse">
-  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching">Matching</a></li>
-  <li><a href="#andres-comment-curvature-features" id="toc-andres-comment-curvature-features" class="nav-link" data-scroll-target="#andres-comment-curvature-features">Andres, comment curvature features</a></li>
+  <li><a href="#graph-theoretical-features" id="toc-graph-theoretical-features" class="nav-link" data-scroll-target="#graph-theoretical-features">Graph-theoretical features</a></li>
+  <li><a href="#calculation-of-propensity-score" id="toc-calculation-of-propensity-score" class="nav-link" data-scroll-target="#calculation-of-propensity-score">Calculation of propensity score</a>
+  <ul class="collapse">
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a></li>
-  <li><a href="#and-now-the-real-deal" id="toc-and-now-the-real-deal" class="nav-link" data-scroll-target="#and-now-the-real-deal">And now the real deal</a>
-  <ul class="collapse">
-  <li><a href="#confounding-variables" id="toc-confounding-variables" class="nav-link" data-scroll-target="#confounding-variables">Confounding variables</a></li>
-  <li><a href="#treatment" id="toc-treatment" class="nav-link" data-scroll-target="#treatment">Treatment</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -217,36 +215,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="a-look-into-the-collected-data" class="level2">
 <h2 class="anchored" data-anchor-id="a-look-into-the-collected-data">A look into the collected data…</h2>
+<div class="cell" data-execution_count="30">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look at the shortest_path distributions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> pd.read_csv(<span class="st">'processed/final_df_curv_feats.csv'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>), </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">"hspace"</span>:<span class="fl">0.3</span>})</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.size"</span>] <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"shortest_path_length"</span>, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"shortest_path_length"</span>, </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">0</span>], </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)<span class="op">;</span> </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"1. Optimal lengths of the proposed games."</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Count of human paths, stratified by shortest possible path")</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>) </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df.query(<span class="st">"shortest_path_length==4"</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"human_path_length"</span>, </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"human_path_length"</span>, </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">1</span>], </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Human path length'</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"2. Path lengths obtained by human players, when optimal length is 3."</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of human path lengths, with shortest possible path = 3");</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="data-distribs" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="datastory_files/figure-html/data-distribs-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">How are the data distributed among successful and unsuccessful games? We show: (top) The distributions of optimal lengths of the proposed games, and (bottom) The distributions of path lengths obtained by humans.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="players-as-humans" class="level1">
-<h1>Players as humans</h1>
+<section id="players-as-humans" class="level2">
+<h2 class="anchored" data-anchor-id="players-as-humans">Players as humans</h2>
 <section id="strategies-and-attitudes" class="level3">
 <h3 class="anchored" data-anchor-id="strategies-and-attitudes">Strategies and attitudes</h3>
-<p>Being the Wikispeedia game and <strong>individual</strong> and <strong>timed game</strong>, players responses to the challenge it serves are miscellaneous. Individuals may <strong>consciously</strong> come up with a <strong>strategy</strong> to tackle the task they are assigned to, or <strong>unintentionally</strong> manifest a <strong>behavior</strong> that could be observed by scrupulous data analysts, like us. The Wikispeedia game itself was designed to extrapolate information allowing the computation of semantic distance between real-world concepts, to be leveraged in intelligent applications. Less ambitiously, we’re interest in outlining players mutual attitudes and the likeliness these <strong>lead</strong> them to <strong>succeed in the game</strong>, potentially a causal relationship. Among the manifold performable strategies we hypothesised the following: - clicking on hyperlinks showing up at the <strong>top</strong> of the article page; - clicking on hyperlinks showing up in <strong>image captions</strong>; - clicking hyperlinks that are <strong>semantically related</strong> to the previously clicked;<br>
+<p>Being the Wikispeedia game and <strong>individual</strong> and <strong>timed game</strong>, players responses to the challenge it serves are miscellaneous. Individuals may <strong>consciously</strong> come up with a <strong>strategy</strong> to tackle the task they are assigned to, or <strong>unintentionally</strong> manifest a <strong>behavior</strong> that could be observed by scrupulous data analysts, like us. The Wikispeedia game itself was designed to extrapolate information allowing the computation of semantic distance between real-world concepts, to be leveraged in intelligent applications. Less ambitiously, we’re interest in outlining players mutual attitudes and the likeliness these <strong>lead</strong> them to <strong>succeed in the game</strong>, potentially a causal relationship. Among the manifold performable strategies we hypothesised the following: - clicking on hyperlinks showing up at the <strong>top</strong> of the article page; - clicking on hyperlinks showing up in <strong>image captions</strong>; - clicking hyperlinks that are <strong>semantically related</strong> to the current article;<br>
 - clicking hyperlinks that are semantically related to the <strong>target article</strong>.</p>
 <p><em>Look at the webpage below, isn’t your gaze naturally directed towards those velvet red petals?</em> This is what we’re talking about.</p>
 <p><img src="images/Aesthetics.png" class="img-fluid"></p>
 <p>As “the Parthenon’s facade” showing a marvellous “interpretation of golden rectangles in its proportions” is judged to be aesthetically valuable by humans ability to discriminate at a sensory level, it is also true that <strong>visual content attracts human attention</strong> more than raw text.</p>
 <p>Additionally, picture yourself in a <strong>competitive framework</strong>, with a stopwatch in your left hand and your right trembling fingers on a mouse, determined to break down the shortest ever recorded Wikispeedia game and be remembered for eternity. Wouldn’t you click on <strong>top-positioned hyperlinks</strong> or would you parse the article in search for the best catch?</p>
-<p><img src="images/stressed.png" class="img-fluid"> https://www.dreamstime.com/failed-stressed-businessman-tired-to-work-computer-put-hands-head-busy-time-hard-working-cartoon-background-image163719368</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-source="https://radionotas.com/2021/04/16/10-errores-comunes-de-un-locutor-de-radio/" data-execution_count="33">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/stressed.png'</span>, width<span class="op">=</span><span class="dv">600</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/stressed.jpg'</span>, width<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<p><img src="datastory_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="datastory_files/figure-html/cell-6-output-1.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">In a competitive framework, players have the additional stress of finishing the game <em>fast</em>; information in an easily diggestible format, like images, provide an easy and quick shortcut to progress.</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>In deed, this is the case, at least for the majority of participants to the game.</p>
-<div class="cell" data-execution_count="6">
+</div>
+<section id="indeed-this-is-the-case-at-least-for-the-majority-of-players." class="level4">
+<h4 class="anchored" data-anchor-id="indeed-this-is-the-case-at-least-for-the-majority-of-players.">Indeed, this is the case, at least for the majority of players.</h4>
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_img.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_img.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<p><img src="datastory_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="datastory_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Players seem to be very attracted to links close to images (1 in the plot).</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The graphs can be read as follows: the heights of the columns represent a measure of how trendy the target behavior is among players; the left-sided column, per behavior, is the distribution among unsuccessful players, while the right-sided is the one among successful players.</p>
@@ -254,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_pos.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_pos.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <p><img src="datastory_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
@@ -263,725 +341,148 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is evident that clicking on hyperlinks showing up at the <strong>top of an article</strong> is largely trendier than clicking on hyperlinks elsewhere positioned in the article text (4 to 5 times more common). The gap between successful and unsuccesful players is not that large to show a pattern. It’ll be interesting to test!</p>
 <p>Next, a little trickier to understand: <strong>semantic similarity</strong>. Semantic similarity is a metric that evaluates the distance between items on the basis of the <strong>likeness of their meaning</strong> or semantic content. Humans at play, challenged to reach a target article, whereof the only information they’re provided with is a word or phrase, display common sense knowledge. They would, in fact, look for semantic <strong>relatedness</strong> in clicking the hyperlinks. Thinking of the <strong>hypertextual Wikipedia graph</strong> alone, it can be viewed as a primitive semantic <strong>network</strong>: articles represent the concepts and the hyperlinks are the means of connection between them. Two articles can be more or less “semantically related” if, naivly, the two “overlap” well, with regard to the words present in them and the way they are ordered or used in context.</p>
 <p>An illustration of the structure of the Wikispeedia hypertextual graph is shown in the image below (a part of it). The path between the source article “mathematics” to the target article “Alan Touring” is represented. The grey arrows connect nodes (i.e.&nbsp;hyperlinks) of a human path with length equal to 3, while the black arrows connect nodes of the shortest existing path between source and target articles, with length 2.</p>
-<p>An attitude it is reasonable to suppose players would perform is to click on hyperlinks that are semantically closer and closer, along the human path, to the target article (see yellow arrows in the graph below). A finer one is to click on articles linked by increasing similarity between two neighbouring along the path (see green arrows in the graph below). : the tone of the color is matched with “intensity/degree of the similarity”</p>
-</section>
-<section id="jeffs-plots" class="level2">
-<h2 class="anchored" data-anchor-id="jeffs-plots">JEFF’s PLOTS</h2>
-<div class="cell" data-execution_count="1">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>IFrame(<span class="st">"images/path.pdf"</span>, width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
-
-        <iframe width="600" height="300" src="images/path.pdf" frameborder="0" allowfullscreen=""></iframe>
-        
-</div>
-</div>
-<div class="cell" data-execution_count="9">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#from wand.image import Image as WImage</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#img = WImage(filename='images/path.pdf')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 </section>
 </section>
-<section id="methods" class="level1">
-<h1>Methods</h1>
-<section id="matching" class="level3">
-<h3 class="anchored" data-anchor-id="matching">Matching</h3>
-<p>The methodology chosen for the data processing step is to perform a <strong>matched analysis</strong> with the final objective to test if specific <strong>players’ game strategies lead to success</strong> in the Wikispeedia game. To this end a <strong>logistic regression</strong> is conducted with <strong>players’ success as the outcome</strong> and the following <strong>strategies as predictors</strong>: 1. Positioning of the clicked hyperlinks; 2. Clicking hyperlinks in image captions; 3. Clicking articles with the following semantic similarity patterns: - increasing semantic similarity along the path between articles and the target article; - increasing semantic similarity along the path between two sequentially clicked articles.</p>
-<p>Several <strong>confounders</strong> may affect the outcome of the regression analysis i.e.&nbsp;of the potential correlation between the aforementioned features and success. To mention a few, the <strong>“difficulty”</strong> of the randomly assigned task (source and target articles), affects the players’ successfulness together with the strategy adopted to address it. This “difficulty” could be naively measured by <strong>shortest path distance</strong> between the source and target article in the Wikispeedia hyperlinks graph (calculated with the Floyd-Warshall algorithm). Additionally, the <strong>characteristics</strong> (e.g.&nbsp;nodes in- and out-degree, path legth) of the <strong>“human path”</strong> (i.e.&nbsp;the actual sequence of clicked hyperlinks by the player), again reasonably affects players successfulness and their choice for a strategy.</p>
-</section>
-<section id="andres-comment-curvature-features" class="level3">
-<h3 class="anchored" data-anchor-id="andres-comment-curvature-features">Andres, comment curvature features</h3>
-<p>In order to remove the aforementioned confounders, the dataset is filtered and the matching is performed accordingly with the assumptions made. Players are matched on same shortest path distance of the assigned task, and maximum <strong>propensity score</strong>, with the <strong>treated subject</strong> being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the <strong>controlled subject</strong> being the user NOT performing the strategy.</p>
-<p>The analysis challenge can be reformulated as follows: <em><strong>“being assigned an equally difficult task and being equally free to perform a specific strategy, are players more successful if they adopt that specific strategy?”</strong></em></p>
-<section id="calculation-of-propensity-score" class="level4">
-<h4 class="anchored" data-anchor-id="calculation-of-propensity-score">Calculation of propensity score</h4>
-<p>The purpose motivating the matched analysis is to obtain a “balanced” testing dataset, with subjects actually comparable. In fact, we want to test potential correlation (causation ?) between specific strategies performed and players’ success. The players tested should then be at the <strong>same starting point</strong> when choosing what strategy to adopt, i.e.&nbsp;have same probability to get the treatment (a.k.a. propensity score). The propensity scores are obtained by calculating the <strong>predicted outcomes of a logistic regression</strong> with the outcome being the <em>probability of treatment</em> and the predictors being <em>features of the human paths</em>. The <strong>treated subject</strong> is the <em>user performing the specific strategy</em>, the <strong>controlled subjct</strong> is the user <em>NOT performing the specific startegy</em>.</p>
-</section>
-</section>
-<section id="logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
-<p><strong>Finally, let’s test if there’s a programmatic way to win this game!!</strong> <br> A logistic regression analysis is conducted with the outcome being players’ success in the game and the predictors being the strategies performed by the players.</p>
-<p>How are the data distributed among successful and unsuccessful games? The following plots show</p>
-<ol type="1">
-<li>The distributions of optimal lengths of the proposed games.</li>
-<li>The distributions of path lengths obtained by humans.</li>
-</ol>
-<div class="cell">
+<section id="semantic-similarity-the-paths-that-make-sense." class="level3">
+<h3 class="anchored" data-anchor-id="semantic-similarity-the-paths-that-make-sense.">Semantic similarity: The paths that ‘make sense’.</h3>
+<p>An attitude it is reasonable to suppose players would perform, is to click on hyperlinks that are semantically closer and closer, along the human path, to the target article.</p>
+<div class="cell" data-execution_count="40">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look at the shortest_path distributions</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>), </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">"hspace"</span>:<span class="fl">0.4</span>})</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.size"</span>] <span class="op">=</span> <span class="dv">12</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>successful_counts <span class="op">=</span> (successful_df[<span class="st">'shortest_path_length'</span>]</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                     .value_counts()</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                     .reset_index())</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>successful_counts[<span class="st">"success"</span>] <span class="op">=</span> <span class="st">"successful"</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>unsuccessful_counts <span class="op">=</span> (unsuccessful_df[<span class="st">'shortest_path_length'</span>]</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                       .value_counts()</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                       .reset_index())</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>unsuccessful_counts[<span class="st">"success"</span>] <span class="op">=</span> <span class="st">"unsuccessful"</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>all_counts <span class="op">=</span> pd.concat([successful_counts, </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                        unsuccessful_counts], </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                       axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>all_counts, </span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"index"</span>, </span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"shortest_path_length"</span>, </span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"success"</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">0</span>], </span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)<span class="op">;</span> </span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)<span class="op">;</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"1. Optimal lengths of the proposed games."</span>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Count of human paths, stratified by shortest possible path")</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>) </span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Next plot: frequency by human length</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>successful_human_path_lengths_3 <span class="op">=</span> (successful_df</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                                   [successful_df[<span class="st">'shortest_path_length'</span>] <span class="op">==</span> <span class="dv">3</span>]</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>                                   [<span class="st">'human_path_length'</span>]</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>                                   .value_counts()</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>                                   .reset_index())</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>successful_human_path_lengths_3[<span class="st">"success"</span>] <span class="op">=</span> <span class="st">"successful"</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>unsuccessful_human_path_lengths_3 <span class="op">=</span> (unsuccessful_df</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                                     [unsuccessful_df[<span class="st">'shortest_path_length'</span>] <span class="op">==</span> <span class="dv">3</span>]</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>                                     [<span class="st">'human_path_length'</span>]</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>                                     .value_counts()</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>                                     .reset_index())</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>unsuccessful_human_path_lengths_3[<span class="st">"success"</span>] <span class="op">=</span> <span class="st">"unsuccessful"</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>all_path_l3 <span class="op">=</span> pd.concat([successful_human_path_lengths_3,</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>                         unsuccessful_human_path_lengths_3])</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>all_path_l3, </span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"index"</span>, </span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"human_path_length"</span>, </span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"success"</span>, </span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">1</span>],</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Human path length'</span>)</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"2. Path lengths obtained by human players, when optimal length is 3."</span>)</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of human path lengths, with shortest possible path = 3");</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"images/path.png"</span>, width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-</div>
-<p>Given a shortest path length of 3, the majority of human path lengths are 3, 4, 5 for both successful and unsuccessful paths. Let’s filter the corresponding DataFrames to only keep these path lengths. The matched analysis will be done with these lengths.</p>
-<hr>
-</section>
-<section id="and-now-the-real-deal" class="level2">
-<h2 class="anchored" data-anchor-id="and-now-the-real-deal">And now the real deal</h2>
-<p>We wanna test wheather different strategies lead to success in the Wikispeedia game. With this goal in mind, paths can be characterized through local features of the clicked links and articles. The features we extract are:</p>
-<ul>
-<li>Relative position of each hyperlink within the current article.</li>
-<li>Is the hyperlink next to an image?</li>
-<li>Is the hyperlink inside a table?</li>
-<li>Similarity between current and target article.</li>
-<li>Hyperlink curvature along the path.</li>
-</ul>
-<p>Once each path has been featurized we perform a matching analysis that lets us reduce the bias in the distributions of successful and unsuccessful populations. For this, we find pairs of <code>subjects</code> (paths) in the dataset, that have very similar features, but differ in the one we want to test (the <code>treatment</code>). The new distributions will then be much less biased and we will be able to compare the effect of the treatment variable.</p>
-<section id="confounding-variables" class="level3">
-<h3 class="anchored" data-anchor-id="confounding-variables">Confounding variables</h3>
-<p>Many factors can affect the analysis, among them:</p>
-<ol type="1">
-<li>the difficulty of each task, and</li>
-<li>the strategy adopted to solve it.</li>
-</ol>
-<p>To address the first, we naively quantify <code>difficulty</code> of a task as the minimum distance between the source and the target, as determined with the Floyed-Warshall algorithm, while the second is addressed through path length, e.g.&nbsp;the total number of links clicked by each player in the given game.</p>
-<p>Controlling by such variables allows a first approximation to controlling these confounding effects.</p>
-</section>
-<section id="treatment" class="level3">
-<h3 class="anchored" data-anchor-id="treatment">Treatment</h3>
-<p>We will test the effect of clicking mostly links in image boxes.</p>
-<p>The question is then: given an equally difficult task assigned, and having a fixed number of possible choices to perform, are players more successful if they adopt <code>clicking mainly links in images</code> as a strategy?</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>successful_df <span class="op">=</span> successful_df[(successful_df[<span class="st">'shortest_path_length'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="op">==</span> <span class="dv">3</span>))]</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>successful_df <span class="op">=</span> successful_df[(successful_df[<span class="st">'human_path_length'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">3</span> <span class="op">&lt;=</span> x <span class="op">&lt;=</span> <span class="dv">5</span>))]</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>successful_df.head(<span class="dv">3</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>unsuccessful_df <span class="op">=</span> unsuccessful_df[(unsuccessful_df[<span class="st">'shortest_path_length'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="op">==</span> <span class="dv">3</span>))]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>unsuccessful_df <span class="op">=</span> unsuccessful_df[(unsuccessful_df[<span class="st">'human_path_length'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">3</span> <span class="op">&lt;=</span> x <span class="op">&lt;=</span> <span class="dv">5</span>))]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>unsuccessful_df.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>At this point, we have filtered the successful and unsuccessful DataFrames by the following conditions:</p>
-<pre><code>Shortest path length = 3 --&gt; we hypothesize that all paths have the same "difficulty" by enforcing this
-The actual human path lengths are 3,4,5 --&gt; the majority of human paths are within these lengths</code></pre>
-<p>The next step is to perform matching of datasets. To make this process possible, we first augment both successful and unsuccessful DataFrames with is_successful Boolean condition.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>successful_df[<span class="st">'is_successful'</span>] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>unsuccessful_df[<span class="st">'is_successful'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the successful and unsuccessful DataFrames</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> pd.concat([successful_df, unsuccessful_df])</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>final_df.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>final_df.head(<span class="dv">3</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># save the DataFrame</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>final_df.to_csv(<span class="st">'final_df.csv'</span>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># next, we will calculate "treatments" involving semantic distance metrics for the DataFrame</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>2 . Document Similarity Similarity Between Wikipedia Articles: ‘Bag-of-Words’ Cosine Similarity Based on Word Frequencies</p>
-<p>We are interested in measuring <em>similarity</em> between Wikipedia articles to investigate players’ strategies in Wikispeedia. The proposed similarity is Cosine Similarity measured on word frequencies given a pair of articles. Therefore, the assumption we make is that articles with similar occurrences of words are similar.</p>
-<p>In order to mitigate similarity due to common English words such as “the”, we apply a filter as follows:</p>
-<pre><code>Remove all Stop words as defined in Scikit-learn
-
-https://scikit-learn.org/stable/modules/feature_extraction.html#nqy18
-
-Remove all white spaces and \n characters
-
-Apply a scaled version of word frequency count as implemented in TfidfTransformer in Scikit-learn:
-
-https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html#sklearn.feature_extraction.text.TfidfTransformer</code></pre>
-<p>The cell blocks below show our data processing pipeline.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>base_path <span class="op">=</span> <span class="st">'.data/plaintext_articles'</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>articles <span class="op">=</span> os.listdir(base_path)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the article names in alphabetical order. This is not strictly required</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>articles <span class="op">=</span> <span class="bu">sorted</span>(articles)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_duplicates_and_fix_names(articles: <span class="bu">list</span>):</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""this function parses all the articles provided in the plaintext folder and stores the</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">       names of all the articles after "cleaning" them (some articles containing accents have encoded names).</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">       The raw text from the files are also stored in a list after removing white spaces and empty lines."""</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parse_text(article: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""this helper function reads a raw text file and removes white spaces and empty lines."""</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(os.path.join(base_path, article)) <span class="im">as</span> f:</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># remove white spaces</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            raw_text <span class="op">=</span> [line.rstrip() <span class="cf">for</span> line <span class="kw">in</span> f.readlines()]</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># remove empty lines</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            raw_text <span class="op">=</span> [line.strip() <span class="cf">for</span> line <span class="kw">in</span> raw_text <span class="cf">if</span> line <span class="op">!=</span> <span class="st">''</span>]</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="bu">str</span>(raw_text)</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># some article names have errors - fix these</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    article_names_cleaned, texts <span class="op">=</span> [], []</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> article <span class="kw">in</span> articles:</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the "%" character indicates an encoded name</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">"%"</span> <span class="kw">not</span> <span class="kw">in</span> article:</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># store the article name</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>            article_names_cleaned.append(article)</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>            <span class="co"># store the raw text from the article</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>            texts.append(parse_text(article))</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(os.path.join(base_path, article), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>                <span class="co"># extract the correct name. It is always on the 3rd line of the article</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>                correct_name <span class="op">=</span> f.readlines()[<span class="dv">2</span>].replace(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">''</span>)</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>                <span class="co"># store the article name</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>                article_names_cleaned.append(correct_name)</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>                <span class="co"># store the raw text from the article</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>                texts.append(parse_text(article))</span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove ".txt" from the article names</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    article_names_cleaned <span class="op">=</span> [article.replace(<span class="st">'.txt'</span>, <span class="st">''</span>) <span class="cf">for</span> article <span class="kw">in</span> article_names_cleaned]</span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove list bracket from string casting of raw text</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    texts <span class="op">=</span> [text.replace(<span class="st">'['</span>, <span class="st">''</span>) <span class="cf">for</span> text <span class="kw">in</span> texts]</span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> article_names_cleaned, texts</span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>article_names_cleaned, texts <span class="op">=</span> remove_duplicates_and_fix_names(articles)</span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-scrolled="true">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># count word frequency using sklearn out-of-the-box functions</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer, TfidfVectorizer</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># remove common stop words</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>tfid_vectorizer <span class="op">=</span> TfidfVectorizer(stop_words<span class="op">=</span><span class="st">'english'</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># apply CountVectorizer and TfidfTransform sequentially</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> tfid_vectorizer.fit_transform(texts)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> matrix.todense()</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># by default, "TfidfVectorizer" uses l2 norm and thus, to obtain the Cosine Similarity,</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># we simply perform a dot product of the matrix</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>cosine_sim <span class="op">=</span> pd.DataFrame(np.dot(np.array(matrix), np.array(matrix).T), columns<span class="op">=</span>article_names_cleaned)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># assign the index names also as the article names. This is used for easy querying pairs of articles</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>cosine_sim.index <span class="op">=</span> article_names_cleaned        </span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>cosine_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># save the Cosine Similarity matrix so we do not have to re-compute it every time</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>np.save(<span class="st">'cosine_similarity.npz'</span>, np.array(cosine_sim))</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># let's take a look at the Cosine Similarity distribution of the most similar article to a given article</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>most_similar <span class="op">=</span> []</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(cosine_sim)):</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># index [-2] because index [-1] is always = 1 since it is a self similarity</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    most_similar.append(<span class="bu">sorted</span>(cosine_sim.iloc[idx])[<span class="op">-</span><span class="dv">2</span>])</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the similarities</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>pd.Series(most_similar).plot(kind<span class="op">=</span><span class="st">'hist'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Cosine Similarity Distribution of Most Similar Articles"</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Cosine Similarity"</span>)<span class="op">;</span> plt.ylabel(<span class="st">"Absolute Counts"</span>)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># there are no glaring red flags, e.g., most Cosine Similarities close to 0 or 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show a few concrete examples and see if our metric makes empirical sense</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cosine_sim[<span class="st">'Ukraine'</span>].sort_values()</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># results look reasonable</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cosine_sim[<span class="st">'Zinc'</span>].sort_values()</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># results also look reasonable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "Cygni" are star systems/extrasolar planets and thus are expected to be similar</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the time periods have some similarity</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>sns.clustermap(cosine_sim.iloc[<span class="dv">10</span>:<span class="dv">20</span>, <span class="dv">10</span>:<span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "Cancri" are exoplanets and thus are expected to be similar</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we again see similarity between time periods</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>sns.clustermap(cosine_sim.iloc[<span class="dv">50</span>:<span class="dv">60</span>, <span class="dv">50</span>:<span class="dv">60</span>])</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># after confirming that the Cosine Similarity method is informative, we next show the function</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we will use to extract similarity of articles in a navigation path</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># first show a hard-coded navigation path for illustration</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>navigation_path <span class="op">=</span> <span class="st">'14th_century;Time;Light;Rainbow'</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_path_cosine_similarity(path: <span class="bu">str</span>, matrix: pd.DataFrame, method: <span class="bu">str</span><span class="op">=</span><span class="st">'sequential'</span>) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""this function takes a navigation path string and returns an array of the Cosine Similarity.</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">       Two methods are supported: 'sequential' (default) which measures the sequential similarity and </span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">       'target' which measures the similarity between the current article at the target article.</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">       </span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">       Input:</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">       path: navigation path string</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">       matrix: pre-computed Cosine Similarity matrix</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">       method: measurement method (defaults to 'sequential')</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">       </span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">       Return:</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">       list: list of similarity measures</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># there is 1 article that is duplicated in the plaintext folder. Problematically, the duplicated</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># article has different names and navigation paths can point to these different names, yet the </span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># article is the same. This one exception is handled here. In the implementation, we do not have to </span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># worry about this particular article pointing back to itself as it is not possible</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># navigation paths are separated by ";"</span></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> path.split(<span class="st">';'</span>)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the path only contains the starting article, return None</span></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(path) <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    path_sims <span class="op">=</span> []</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_correct_name(query: <span class="bu">str</span>, base_path: <span class="bu">str</span><span class="op">=</span><span class="st">'.data/plaintext_articles'</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""this nested function is called in case a path contains error characters.</span></span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="co">           Returns the fixed path so it can be used to query the Cosine Similarity matrix."""</span></span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'_'</span> <span class="kw">in</span> query <span class="kw">and</span> <span class="st">'%'</span> <span class="kw">not</span> <span class="kw">in</span> query:</span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query</span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> query <span class="kw">in</span> [<span class="st">'Podcasting'</span>, <span class="st">'Color'</span>, <span class="st">'Fencing'</span>, <span class="st">'Anemia'</span>, <span class="st">'Quito'</span>]:</span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> query</span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(os.path.join(base_path, <span class="ss">f'</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">.txt'</span>), <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>                out <span class="op">=</span> f.readlines()[<span class="dv">2</span>].replace(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, <span class="st">''</span>)</span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> out</span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute the similarity between sequential nodes</span></span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># output list length is N-1</span></span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> method <span class="op">==</span> <span class="st">'sequential'</span>:</span>
-<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(path)<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>):</span>
-<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
-<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>                path_sims.append(matrix.loc[path[idx]].loc[path[idx<span class="op">+</span><span class="dv">1</span>]])</span>
-<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span>:</span>
-<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>                <span class="co"># either path or both paths could be wrong - just "fix" both</span></span>
-<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>                <span class="co"># treat the 1 exception due to duplicated file</span></span>
-<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> get_correct_name(path[idx]) <span class="op">==</span> <span class="st">'Polish–Muscovite War (1605–1618)'</span>:</span>
-<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>                    sim <span class="op">=</span> <span class="bu">float</span>(cosine_sim.loc[<span class="st">'Polish–Muscovite War (1605–1618)'</span>].drop_duplicates()[get_correct_name(path[idx<span class="op">+</span><span class="dv">1</span>])])</span>
-<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(sim)</span>
-<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> get_correct_name(path[idx<span class="op">+</span><span class="dv">1</span>]) <span class="op">==</span> <span class="st">'Polish–Muscovite War (1605–1618)'</span>:</span>
-<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>                    sim <span class="op">=</span> cosine_sim.loc[get_correct_name(path[idx])].drop_duplicates()[<span class="st">'Polish–Muscovite War (1605–1618)'</span>]</span>
-<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(sim)</span>
-<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(matrix.loc[get_correct_name(path[idx])].loc[get_correct_name(path[idx<span class="op">+</span><span class="dv">1</span>])])</span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute the similarity between the current node and the target node</span></span>
-<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># output list length is N</span></span>
-<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">'target'</span>:</span>
-<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(path), <span class="dv">1</span>):</span>
-<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
-<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>                path_sims.append(matrix.loc[path[idx]].loc[path[<span class="op">-</span><span class="dv">1</span>]])</span>
-<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span>:</span>
-<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>                <span class="co"># either path or both paths could be wrong - just "fix" both</span></span>
-<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>                <span class="co"># treat the 1 exception due to duplicated file</span></span>
-<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> get_correct_name(path[idx]) <span class="op">==</span> <span class="st">'Polish–Muscovite War (1605–1618)'</span>:</span>
-<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>                    sim <span class="op">=</span> cosine_sim.loc[<span class="st">'Polish–Muscovite War (1605–1618)'</span>].drop_duplicates()[get_correct_name(path[<span class="op">-</span><span class="dv">1</span>])]</span>
-<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(sim)</span>
-<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> get_correct_name(path[<span class="op">-</span><span class="dv">1</span>]) <span class="op">==</span> <span class="st">'Polish–Muscovite War (1605–1618)'</span>:</span>
-<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>                    sim <span class="op">=</span> <span class="bu">float</span>(cosine_sim.loc[get_correct_name(path[idx])].drop_duplicates()[<span class="st">'Polish–Muscovite War (1605–1618)'</span>])</span>
-<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(sim)</span>
-<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>                    path_sims.append(matrix.loc[get_correct_name(path[idx])].loc[get_correct_name(path[<span class="op">-</span><span class="dv">1</span>])])</span>
-<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">'Unsupported similarity method: choose from "sequential" or "target".'</span>)</span>
-<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path_sims</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(navigation_path.split(<span class="st">';'</span>))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show the "sequential" method</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sequential_sims <span class="op">=</span> get_path_cosine_similarity(path<span class="op">=</span>navigation_path,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                             matrix<span class="op">=</span>cosine_sim,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                                             method<span class="op">=</span><span class="st">'sequential'</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># intepreted as:</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(14th_century, Time) = 0.031</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(Time, Light) = 0.147</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(Light, Rainbow) = 0.158</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># the similarity list is always N-1 in length, N = # nodes</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>sequential_sims</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show the "target" method</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>target_sims <span class="op">=</span> get_path_cosine_similarity(path<span class="op">=</span>navigation_path,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                                         matrix<span class="op">=</span>cosine_sim,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                                         method<span class="op">=</span><span class="st">'target'</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># intepreted as:</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(14th_century, Rainbow) = 0.008</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(Time, Rainbow) = 0.035</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(Light, Rainbow) = 0.158</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># sim(Rainbow, Rainbow) = 1 (the path was successful so similarity is 1)</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the similarity list is now N in length, N = # nodes</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># note: paths where the last index != 1 means the path was unsuccessful</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>target_sims</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the "sequential" and "target" cosine similarities and augment the DataFrame with these metrics</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'path_seq_cosine_sim'</span>] <span class="op">=</span> final_df[<span class="st">'path'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: get_path_cosine_similarity(x, matrix<span class="op">=</span>cosine_sim))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'path_target_cosine_sim'</span>] <span class="op">=</span> final_df[<span class="st">'path'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: get_path_cosine_similarity(x, matrix<span class="op">=</span>cosine_sim, method<span class="op">=</span><span class="st">'target'</span>))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>final_df.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># next, write a function that returns whether the Cosine similarities in a navigation path are increasing/decreasing</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sims_to_bool_path(path: <span class="bu">str</span>):</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""this function takes a navgiation path as input and returns the path with same dimensions</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">       containing Booleans denoting whether the Cosine similarity is increasing"""</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    bool_path <span class="op">=</span> []</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(path)<span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> path[idx<span class="op">+</span><span class="dv">1</span>] <span class="op">&gt;</span> path[idx]:</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>            bool_path.append(<span class="va">True</span>)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            bool_path.append(<span class="va">False</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> bool_path</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'path_seq_boolean'</span>] <span class="op">=</span> final_df[<span class="st">'path_seq_cosine_sim'</span>].<span class="bu">apply</span>(sims_to_bool_path)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'path_target_boolean'</span>] <span class="op">=</span> final_df[<span class="st">'path_target_cosine_sim'</span>].<span class="bu">apply</span>(sims_to_bool_path)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>final_df.head(<span class="dv">3</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this function filters paths that only contain strictly increasing Cosine similarities</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> filter_strictly_increasing_sims(path_list: <span class="bu">list</span>):</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span> <span class="cf">if</span> <span class="va">False</span> <span class="kw">in</span> path_list <span class="cf">else</span> <span class="va">True</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'seq_strictly_increasing'</span>] <span class="op">=</span> final_df[<span class="st">'path_seq_boolean'</span>].<span class="bu">apply</span>(filter_strictly_increasing_sims)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>final_df[<span class="st">'target_strictly_increasing'</span>] <span class="op">=</span> final_df[<span class="st">'path_target_boolean'</span>].<span class="bu">apply</span>(filter_strictly_increasing_sims)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>final_df.head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the matching algorithm requires some computation time</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the matched DataFrames all at once and save them so they can be read into memory directly</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># there are 2 treatments</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    1. strictly increasing *sequential* Cosine similarity</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#    2. strictly increasing *target* Cosine similarity</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># there are also 3 conditions we filter on</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    1. human_path_length = 3</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    2. human_path_length = 4</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    3. human_path_length = 5</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> treatment <span class="kw">in</span> [<span class="st">'seq_strictly_increasing'</span>, <span class="st">'target_strictly_increasing'</span>]:</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> length <span class="kw">in</span> [<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]:</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        treatment_df <span class="op">=</span> final_df[final_df[treatment] <span class="op">==</span> <span class="va">True</span>]</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        control_df <span class="op">=</span> final_df[final_df[treatment] <span class="op">==</span> <span class="va">False</span>]</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>        G <span class="op">=</span> nx.Graph()</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> control_id, control_row <span class="kw">in</span> control_df.iterrows():</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> treatment_id, treatment_row <span class="kw">in</span> treatment_df.iterrows():</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Adds an edge only for the same human path length</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (control_row[<span class="st">'human_path_length'</span>] <span class="op">==</span> length <span class="kw">and</span> treatment_row[<span class="st">'human_path_length'</span>] <span class="op">==</span> length):</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>                    G.add_edge(control_id, treatment_id)</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>        matching <span class="op">=</span> nx.max_weight_matching(G)</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>        matched <span class="op">=</span> [i[<span class="dv">0</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(matching)] <span class="op">+</span> [i[<span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(matching)]</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>        balanced_df <span class="op">=</span> final_df.iloc[matched]</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># save balanced_df</span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>        balanced_df.to_csv(<span class="ss">f'</span><span class="sc">{</span>treatment<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>length<span class="sc">}</span><span class="ss">.csv'</span>)</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># next, perform logistic regression on each treatment with fixed human path length</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read all the matched DataFrames into memory</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>df_seq_3 <span class="op">=</span> pd.read_csv(<span class="st">'seq_strictly_increasing_3.csv'</span>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>df_seq_4 <span class="op">=</span> pd.read_csv(<span class="st">'seq_strictly_increasing_4.csv'</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>df_seq_5 <span class="op">=</span> pd.read_csv(<span class="st">'seq_strictly_increasing_5.csv'</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>df_target_3 <span class="op">=</span> pd.read_csv(<span class="st">'target_strictly_increasing_3.csv'</span>)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>df_target_4 <span class="op">=</span> pd.read_csv(<span class="st">'target_strictly_increasing_4.csv'</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>df_target_5 <span class="op">=</span> pd.read_csv(<span class="st">'target_strictly_increasing_5.csv'</span>)</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># store all results in a dictionary</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> df, experiment_name <span class="kw">in</span> <span class="bu">zip</span>([df_seq_3, df_seq_4, df_seq_5, df_target_3, df_target_4, df_target_5],</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>                               [<span class="st">'Sequential 3'</span>, <span class="st">'Sequential 4'</span>, <span class="st">'Sequential 5'</span>, <span class="st">'Target 3'</span>, <span class="st">'Target 4'</span>, <span class="st">'Target 5'</span>]):</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'Sequential'</span> <span class="kw">in</span> experiment_name:</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>        mod <span class="op">=</span> smf.logit(formula<span class="op">=</span><span class="st">'is_successful ~  seq_strictly_increasing'</span>, data<span class="op">=</span>df)</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>        mod <span class="op">=</span> smf.logit(formula<span class="op">=</span><span class="st">'is_successful ~  target_strictly_increasing'</span>, data<span class="op">=</span>df)</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> mod.fit()</span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dictionary to store the coefficients and p-values of the current experiment</span></span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    curr_analysis <span class="op">=</span> {}</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store the intercept</span></span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>    curr_analysis[<span class="st">'Intercept'</span>] <span class="op">=</span> res.params[<span class="dv">0</span>]</span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store the intercept p-value</span></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>    curr_analysis[<span class="st">'Intercept p-value'</span>] <span class="op">=</span> res.pvalues[<span class="dv">0</span>]</span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store the coefficient for **strictly increasing Cosine similarity**</span></span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>    curr_analysis[<span class="st">'Coefficient'</span>] <span class="op">=</span> res.params[<span class="dv">1</span>]</span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># store the coefficient p-value</span></span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>    curr_analysis[<span class="st">'Coefficient p-value'</span>] <span class="op">=</span> res.pvalues[<span class="dv">1</span>]</span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    results[experiment_name] <span class="op">=</span> curr_analysis</span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results)</span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>The syntax in the above table is interpreted as :</p>
-<pre><code>Sequential means the strictly increasing Cosine similarity was measured for sequential articles
-Target means the strictly increasing Cosine similarity was measured based on sequential article compared to the target article
-The number indicates the human path length fixed. Previously, we also fixed that the shortest path length is 3.</code></pre>
-<p>Our research question is:</p>
-<p><em>When given X number of choices in the same difficulty game, how did successful and unsuccessful players differ in their clicking behaviour?</em></p>
-<p>Based on the above table, the p-values for both the incercept and coefficient for logistic regression are significant for all experiments except 1 (Sequential 5). The interpretation for all experiment findings are similar. Concretely, consider the experiment Sequential 3. The interpretation is:</p>
-<pre><code>*Given a shortest path length of 3 (fixed difficulty) and given a human path length of 3 (when the human makes 3 choices on article clicks), clicking articles with increasing Cosine similarity between sequential articles (as a proxy to measure semantic meaning), leads to more successful outcomes.*</code></pre>
-<p>For Target experiments have a similar interpretation. Concretely, consider the experiment Target 5:</p>
-<pre><code>*Given a shortest path length of 3 (fixed difficulty) and given a human path length of 5 (when the human makes 5 choices on article clicks), clicking articles with increasing Cosine similarity between the current article and the target article (as a proxy to measure semantic meaning), leads to more successful outcomes.*</code></pre>
-<p>These findings are interesting and suggest that (potentially contrarily to common sense) clicking articles based on semantic meaning can lead to more successful outcomes in the Wikispeedia game (at least the current version we are investigating).</p>
-<div id="fig-polar" class="quarto-figure quarto-figure-center anchored">
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  subplot_kw <span class="op">=</span> {<span class="st">'projection'</span>: <span class="st">'polar'</span>} </span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption><p></p>
+<p><img src="datastory_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">There are many ways of solving a puzzle. The optimal (black) doesn’t always make sense. A way for it to make sense is to click the article most similar to the current one (green path: sequential similarity increase), or click the article that is most similar to the target article (yellow path: target similarity increase). As shown by the intensity of the color, similarity increases in these paths as the player approaches the goal article.</figcaption><p></p>
 </figure>
 </div>
+</div>
+</div>
+<p>A smarter way is to click on articles linked by increasing similarity between two neighbouring along the path. These paths make sense, however, is this really the way the games are played? and, is this really effective?</p>
+<p>Let’s use the data to respond to some of these questions.</p>
+<p>Before we start, note that several <strong>confounders</strong> may affect the outcome of whatever analysis we do, in particular of the potential correlation between whatever features and success.</p>
+<p>A confounder may be the <strong>“difficulty”</strong> of the task. Two players can’t be compared if the comparison is too unfair, that is, if one user is given an easy task while the other is given a harder one no conclussion can be drawn: we need to find a way to make this even…</p>
+</section>
+</section>
+<section id="a-matching-study" class="level1">
+<h1>A matching study</h1>
+<p>The methodology chosen for the data processing step is to perform a <strong>matched analysis</strong> with the final objective to test if specific <strong>players’ game strategies lead to success</strong> in the Wikispeedia game. To this end a <strong>logistic regression</strong> is conducted with <strong>players’ success as the outcome</strong> and the following <strong>strategies as predictors</strong>:</p>
+<ol type="1">
+<li>Positioning of the clicked hyperlinks;</li>
+<li>Clicking hyperlinks in image captions;</li>
+<li>Clicking articles with the following semantic similarity patterns:
+<ul>
+<li>increasing semantic similarity along the path between articles and the target article;</li>
+<li>increasing semantic similarity along the path between two sequentially clicked articles.</li>
+</ul></li>
+</ol>
+<p>As explained, the main confounder here is the game difficulty. Note that this is not only determined by the proposition of the task (that is, the source and target articles), but it’s a dynamic thing: depending on the users’ choices, the task can become harder or easier as the game develops. Thus, to fairly compare different paths in terms of difficulty, we need to generate more features, that are path dependent, and not only dependent on the endpoints.</p>
+<section id="graph-theoretical-features" class="level2">
+<h2 class="anchored" data-anchor-id="graph-theoretical-features">Graph-theoretical features</h2>
+<p>To describe a path, we can describe each link clicked (i.e.&nbsp;each piece of the path), in the context of the wikipedia network. What do we mean by this? Consider the articles “<em>United States of America</em>” and “<em>Bernard Hinault</em>”. The first one is one of the countries with the most impact on the world, intuitively it has a lot of other articles pointing to it, and also links to a lot other articles.</p>
+<p>The second is… well, less known. Way less known. Our friend here is, although one of the greatest cyclist in history, part of a very narrow context, in the context of the wikipedia network. If we manage to reach “<em>United States of America</em>”, we have big chances of reaching any other article, as it’s well connected, while if we ever reach “<em>Bernard Hinault</em>”, the paths we take may be longer.</p>
+<p>To put this into numbers, we quantify the <strong>edge curvature</strong> of each edge (link) in the path. This quantifies the ammount of “flow potential” of a link. If a link has many ways in and many ways out, then its curvature is very negative, however if the ways in (or the ways out) are too few, we might have encountered a bottle neck, with a curvature closer to 0.</p>
+<p><br> <font size="4"> <span class="math display">\[\begin{align*}
+F(_\rightarrow e_\rightarrow) &amp;= 2 - in(i) - out(j)
+\end{align*}\]</span> </font> <br></p>
+<p>Using features based on this, we can now easily compare if two users took similar paths, regardless of which articles were given as a task; this allows a more general matching.</p>
+<p>In order to remove the aforementioned confounders, the dataset is filtered and the matching is performed accordingly with the assumptions made. Players are matched on same shortest path distance of the assigned task, and maximum <strong>propensity score</strong>, with the <strong>treated subject</strong> being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the <strong>controlled subject</strong> being the user NOT performing the strategy.</p>
+<p>The analysis challenge can be reformulated as follows: <em><strong>“being assigned an equally difficult task and being equally free to perform a specific strategy, are players more successful if they adopt that specific strategy?”</strong></em></p>
+</section>
+<section id="calculation-of-propensity-score" class="level2">
+<h2 class="anchored" data-anchor-id="calculation-of-propensity-score">Calculation of propensity score</h2>
+<p>The purpose motivating the matched analysis is to obtain a “balanced” testing dataset, with subjects actually comparable. In fact, we want to test potential correlation (causation ?) between specific strategies performed and players’ success. The players tested should then be at the <strong>same starting point</strong> when choosing what strategy to adopt, i.e.&nbsp;have same probability to get the treatment (a.k.a. propensity score).</p>
+<p>The propensity scores are obtained by calculating the <strong>predicted outcomes of a logistic regression</strong> with the outcome being the <em>probability of treatment</em> and the predictors being <em>features of the human paths</em>. The <strong>treated subject</strong> is the <em>user performing the specific strategy</em>, the <strong>controlled subjct</strong> is the user <em>NOT performing the specific startegy</em>.</p>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
+<section id="finally-lets-test-if-theres-a-programmatic-way-to-win-this-game" class="level4">
+<h4 class="anchored" data-anchor-id="finally-lets-test-if-theres-a-programmatic-way-to-win-this-game">Finally, let’s test if there’s a programmatic way to win this game!!</h4>
+<p>A logistic regression analysis is conducted with the outcome being players’ success in the game and the predictors being the strategies performed by the players.</p>
+<div class="cell" data-execution_count="64">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> highlight_rows(row):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> row.loc[<span class="st">"p-value"</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#FFB3BA'</span> <span class="co"># Red</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#BAFFC9'</span> <span class="co"># Green</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">'background-color: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(color) <span class="cf">for</span> r <span class="kw">in</span> row]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> (pd.read_csv(<span class="st">"images/results_matching.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>              .loc[[<span class="st">"Coefficient"</span>, <span class="st">"Coefficient p-value"</span>]]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>              .T)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>results_df.columns <span class="op">=</span> [<span class="st">"Coefficient"</span>, <span class="st">"p-value"</span>]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>(results_df</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a> .sort_values(by<span class="op">=</span><span class="st">"p-value"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a> .style</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a> .<span class="bu">apply</span>(highlight_rows, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="64">
+
+<style type="text/css">
+#T_34f23_row0_col0, #T_34f23_row0_col1, #T_34f23_row1_col0, #T_34f23_row1_col1 {
+  background-color: #BAFFC9;
+}
+#T_34f23_row2_col0, #T_34f23_row2_col1, #T_34f23_row3_col0, #T_34f23_row3_col1, #T_34f23_row4_col0, #T_34f23_row4_col1, #T_34f23_row5_col0, #T_34f23_row5_col1 {
+  background-color: #FFB3BA;
+}
+</style>
+<table id="T_34f23">
+  <thead>
+    <tr>
+      <th class="blank level0">&nbsp;</th>
+      <th id="T_34f23_level0_col0" class="col_heading level0 col0">Coefficient</th>
+      <th id="T_34f23_level0_col1" class="col_heading level0 col1">p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_34f23_level0_row0" class="row_heading level0 row0">target_strictly_increasing</th>
+      <td id="T_34f23_row0_col0" class="data row0 col0">0.331702</td>
+      <td id="T_34f23_row0_col1" class="data row0 col1">0.000369</td>
+    </tr>
+    <tr>
+      <th id="T_34f23_level0_row1" class="row_heading level0 row1">used_bottom</th>
+      <td id="T_34f23_row1_col0" class="data row1 col0">-0.480309</td>
+      <td id="T_34f23_row1_col1" class="data row1 col1">0.029248</td>
+    </tr>
+    <tr>
+      <th id="T_34f23_level0_row2" class="row_heading level0 row2">seq_strictly_increasing</th>
+      <td id="T_34f23_row2_col0" class="data row2 col0">0.185502</td>
+      <td id="T_34f23_row2_col1" class="data row2 col1">0.335804</td>
+    </tr>
+    <tr>
+      <th id="T_34f23_level0_row3" class="row_heading level0 row3">used_top</th>
+      <td id="T_34f23_row3_col0" class="data row3 col0">-0.187462</td>
+      <td id="T_34f23_row3_col1" class="data row3 col1">0.358632</td>
+    </tr>
+    <tr>
+      <th id="T_34f23_level0_row4" class="row_heading level0 row4">used_center_bottom</th>
+      <td id="T_34f23_row4_col0" class="data row4 col0">-0.107463</td>
+      <td id="T_34f23_row4_col1" class="data row4 col1">0.604242</td>
+    </tr>
+    <tr>
+      <th id="T_34f23_level0_row5" class="row_heading level0 row5">used_count_images</th>
+      <td id="T_34f23_row5_col0" class="data row5 col0">-0.016091</td>
+      <td id="T_34f23_row5_col1" class="data row5 col1">0.876319</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<p>We test 6 different possible strategies, and we find that <strong>two</strong> of them have some effect in the outcome, namely <code>clicking links in the bottom of the page</code>, and <code>clicking to increase similarity to target</code> (as p-values for both show there’s a significant difference between populations). They have, however, opposite effects: the former has a negative coefficient, while the latter has a positive one, implying that clicking links in the bottom of the page has a significantly negative effect on the outcome of the game. <strong>SO DON’T DO THIS 😭</strong>.</p>
+<p>Additionally, non surprisingly images play no role in user’s success.</p>
+<p>The latter makes a lot of sense, though. This result also provides good evidence that there’s no shortcut to success in this game: If you wanna win in wikispeedia, you will (un)fortunately have to think hard!</p>
 
 
+</section>
 </section>
 </section>
 </section>
