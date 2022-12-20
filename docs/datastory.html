@@ -121,9 +121,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -181,6 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" id="toc-finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" class="nav-link" data-scroll-target="#finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game">Finally, the real deal, is there a programmatic way to win this game?</a></li>
   <li><a href="#yes-and-no" id="toc-yes-and-no" class="nav-link" data-scroll-target="#yes-and-no">YES and NO</a></li>
+  <li><a href="#in-the-end-well-let-you-dear-reader-judge-if-to-be-happy-with-the-result-that-common-sense-actually-makes-sense-or-toi-be-sad-with-the-finding-that-theres-no-way-to-cheat-common-sense." id="toc-in-the-end-well-let-you-dear-reader-judge-if-to-be-happy-with-the-result-that-common-sense-actually-makes-sense-or-toi-be-sad-with-the-finding-that-theres-no-way-to-cheat-common-sense." class="nav-link" data-scroll-target="#in-the-end-well-let-you-dear-reader-judge-if-to-be-happy-with-the-result-that-common-sense-actually-makes-sense-or-toi-be-sad-with-the-finding-that-theres-no-way-to-cheat-common-sense."><strong>In the end we’ll let you, dear reader, judge if to be happy with the result that common sense actually makes sense or toi be sad with the finding that there’s no way to cheat common sense.</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -413,92 +411,59 @@ F(_\rightarrow e_\rightarrow) &amp;= 2 - in(i) - out(j)
 <p>The analysis challenge can be reformulated as follows: <em><strong>“being assigned an equally difficult task and being equally free to perform a specific strategy, are players more successful if they adopt that specific strategy?”</strong></em></p>
 <section id="finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" class="level3">
 <h3 class="anchored" data-anchor-id="finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game">Finally, the real deal, is there a programmatic way to win this game?</h3>
-<div class="cell" data-execution_count="72">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> highlight_rows(row):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> row.loc[<span class="st">"p-value"</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#FFB3BA'</span> <span class="co"># Red</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#BAFFC9'</span> <span class="co"># Green</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">'background-color: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(color) <span class="cf">for</span> r <span class="kw">in</span> row]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> (pd.read_csv(<span class="st">"images/results_matching.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              .loc[[<span class="st">"Coefficient"</span>, <span class="st">"Coefficient p-value"</span>]]</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>              .T)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>results_df.columns <span class="op">=</span> [<span class="st">"Coefficient"</span>, <span class="st">"p-value"</span>]</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>(results_df</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a> .sort_values(by<span class="op">=</span><span class="st">"p-value"</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a> .style</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a> .<span class="bu">apply</span>(highlight_rows, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="72">
-
-<style type="text/css">
-#T_0b1b1_row0_col0, #T_0b1b1_row0_col1, #T_0b1b1_row1_col0, #T_0b1b1_row1_col1 {
-  background-color: #BAFFC9;
-}
-#T_0b1b1_row2_col0, #T_0b1b1_row2_col1, #T_0b1b1_row3_col0, #T_0b1b1_row3_col1, #T_0b1b1_row4_col0, #T_0b1b1_row4_col1, #T_0b1b1_row5_col0, #T_0b1b1_row5_col1 {
-  background-color: #FFB3BA;
-}
-</style>
-<table id="T_0b1b1">
-  <thead>
-    <tr>
-      <th class="blank level0">&nbsp;</th>
-      <th id="T_0b1b1_level0_col0" class="col_heading level0 col0">Coefficient</th>
-      <th id="T_0b1b1_level0_col1" class="col_heading level0 col1">p-value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_0b1b1_level0_row0" class="row_heading level0 row0">target_strictly_increasing</th>
-      <td id="T_0b1b1_row0_col0" class="data row0 col0">0.331702</td>
-      <td id="T_0b1b1_row0_col1" class="data row0 col1">0.000369</td>
-    </tr>
-    <tr>
-      <th id="T_0b1b1_level0_row1" class="row_heading level0 row1">used_bottom</th>
-      <td id="T_0b1b1_row1_col0" class="data row1 col0">-0.480309</td>
-      <td id="T_0b1b1_row1_col1" class="data row1 col1">0.029248</td>
-    </tr>
-    <tr>
-      <th id="T_0b1b1_level0_row2" class="row_heading level0 row2">seq_strictly_increasing</th>
-      <td id="T_0b1b1_row2_col0" class="data row2 col0">0.185502</td>
-      <td id="T_0b1b1_row2_col1" class="data row2 col1">0.335804</td>
-    </tr>
-    <tr>
-      <th id="T_0b1b1_level0_row3" class="row_heading level0 row3">used_top</th>
-      <td id="T_0b1b1_row3_col0" class="data row3 col0">-0.187462</td>
-      <td id="T_0b1b1_row3_col1" class="data row3 col1">0.358632</td>
-    </tr>
-    <tr>
-      <th id="T_0b1b1_level0_row4" class="row_heading level0 row4">used_center_bottom</th>
-      <td id="T_0b1b1_row4_col0" class="data row4 col0">-0.107463</td>
-      <td id="T_0b1b1_row4_col1" class="data row4 col1">0.604242</td>
-    </tr>
-    <tr>
-      <th id="T_0b1b1_level0_row5" class="row_heading level0 row5">used_count_images</th>
-      <td id="T_0b1b1_row5_col0" class="data row5 col0">-0.016091</td>
-      <td id="T_0b1b1_row5_col1" class="data row5 col1">0.876319</td>
-    </tr>
-  </tbody>
+<div id="tbl-results" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Results from the matching study.</caption>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Coefficient</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>increase target similarity</td>
+<td>0.3317</td>
+<td>0.0003</td>
+</tr>
+<tr class="even">
+<td>use bottom links</td>
+<td>-0.4803</td>
+<td>0.0292</td>
+</tr>
+<tr class="odd">
+<td>increse sequential similarity</td>
+<td>0.1855</td>
+<td>0.3358</td>
+</tr>
+<tr class="even">
+<td>use top links</td>
+<td>0.3586</td>
+<td>0.3586</td>
+</tr>
+<tr class="odd">
+<td>use center-bottom links</td>
+<td>-0.1074</td>
+<td>0.6042</td>
+</tr>
+<tr class="even">
+<td>use links in images</td>
+<td>-0.0161</td>
+<td>0.8763</td>
+</tr>
+</tbody>
 </table>
-</div>
 </div>
 </section>
 <section id="yes-and-no" class="level3">
 <h3 class="anchored" data-anchor-id="yes-and-no">YES and NO</h3>
-<p>We tested <strong>6</strong> different possible strategies, and we found that <strong>2</strong> of them impact the players’ successfulness, namely <code>clicking links in the bottom of the page</code>, and <code>clicking to increase similarity to target</code> (the significant p-values allow to infer a difference in the outcome between differently behaving populations players). Instead it is not possible to evaluate if the strategies <code>clicking links in image captions</code>, <code>clicking links in the top of the page</code>, <code>clicking links in the center-bottom of the page</code>, <code>clicking to increase similarity to next</code> give players an edge in the game.</p>
+<p>We tested <strong>6</strong> different possible strategies, and we found that <strong>2</strong> of them impact the players’ successfulness, namely <code>clicking links in the bottom of the page</code>, and <code>clicking to increase similarity to target</code> (the significant p-values allow to infer a difference in the outcome between differently behaving populations players, see <a href="#tbl-results">Table&nbsp;1</a> ). Instead it is not possible to evaluate if the strategies <code>clicking links in image captions</code>, <code>clicking links in the top of the page</code>, <code>clicking links in the center-bottom of the page</code>, <code>clicking to increase similarity to next</code> give players an edge in the game.</p>
 <p><strong>These results well picture reality!</strong></p>
 <p>It is not surprising that clicking hyperliks in image captions doesn’t play a role in users’ success, still we proved they’re tempted to do it. Similarly for the attitude of clicking on hyperlinks located in peculiar positions of the article text. Unexpectedly, though, clicking links in the bottom of the webpage has a significantly negative effect on the outcome of the game. Even if we cannot justify by with common sense, we advise you <strong>NOT TO DO THIS 😭</strong>. Least but not last, <code>clicking to increase similarity to target</code> has proven to have a significantly positive impact on players’ success. We have good evidence that there’s no shortcut to success in this game: if you wanna win in Wikispeedia game, you will (un)fortunately have to think hard!</p>
-<p><strong>In the end we’ll let you, dear reader, judge if to be happy with the result that common sense actually makes sense or toi be sad with the finding that there’s no way to cheat common sense.</strong></p>
+</section>
+<section id="in-the-end-well-let-you-dear-reader-judge-if-to-be-happy-with-the-result-that-common-sense-actually-makes-sense-or-toi-be-sad-with-the-finding-that-theres-no-way-to-cheat-common-sense." class="level3">
+<h3 class="anchored" data-anchor-id="in-the-end-well-let-you-dear-reader-judge-if-to-be-happy-with-the-result-that-common-sense-actually-makes-sense-or-toi-be-sad-with-the-finding-that-theres-no-way-to-cheat-common-sense."><strong>In the end we’ll let you, dear reader, judge if to be happy with the result that common sense actually makes sense or toi be sad with the finding that there’s no way to cheat common sense.</strong></h3>
 
 
 </section>
