@@ -164,20 +164,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" id="toc-wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" class="nav-link active" data-scroll-target="#wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out">Wikispeedia: What does X have to do with Y? You better find out!</a></li>
-  <li><a href="#a-look-into-the-collected-data" id="toc-a-look-into-the-collected-data" class="nav-link" data-scroll-target="#a-look-into-the-collected-data">A look into the collected data…</a></li>
+  <li><a href="#wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" id="toc-wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" class="nav-link active" data-scroll-target="#wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out">Wikispeedia: What does X have to do with Y? You better find out!</a>
+  <ul class="collapse">
   <li><a href="#players-as-humans" id="toc-players-as-humans" class="nav-link" data-scroll-target="#players-as-humans">Players as humans</a>
   <ul class="collapse">
   <li><a href="#strategies-and-attitudes" id="toc-strategies-and-attitudes" class="nav-link" data-scroll-target="#strategies-and-attitudes">Strategies and attitudes</a></li>
-  <li><a href="#semantic-similarity-the-paths-that-make-sense." id="toc-semantic-similarity-the-paths-that-make-sense." class="nav-link" data-scroll-target="#semantic-similarity-the-paths-that-make-sense.">Semantic similarity: The paths that ‘make sense’.</a></li>
+  </ul></li>
+  <li><a href="#a-look-into-the-collected-data" id="toc-a-look-into-the-collected-data" class="nav-link" data-scroll-target="#a-look-into-the-collected-data">A look into the collected data…</a></li>
+  </ul></li>
+  <li><a href="#jeff-add-interesting-visualizationscrispy-distributions-you-got-from-the-exploration-of-the-data" id="toc-jeff-add-interesting-visualizationscrispy-distributions-you-got-from-the-exploration-of-the-data" class="nav-link" data-scroll-target="#jeff-add-interesting-visualizationscrispy-distributions-you-got-from-the-exploration-of-the-data">JEFF add interesting visualizations/crispy distributions you got from the exploration of the data</a>
+  <ul class="collapse">
+  <li><a href="#a-closer-look-into-the-collected-data-hunt-for-covariates" id="toc-a-closer-look-into-the-collected-data-hunt-for-covariates" class="nav-link" data-scroll-target="#a-closer-look-into-the-collected-data-hunt-for-covariates">A closer look into the collected data: hunt for covariates</a></li>
   </ul></li>
   <li><a href="#a-matching-study" id="toc-a-matching-study" class="nav-link" data-scroll-target="#a-matching-study">A matching study</a>
   <ul class="collapse">
-  <li><a href="#graph-theoretical-features" id="toc-graph-theoretical-features" class="nav-link" data-scroll-target="#graph-theoretical-features">Graph-theoretical features</a></li>
-  <li><a href="#calculation-of-propensity-score" id="toc-calculation-of-propensity-score" class="nav-link" data-scroll-target="#calculation-of-propensity-score">Calculation of propensity score</a>
-  <ul class="collapse">
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a></li>
-  </ul></li>
+  <li><a href="#finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" id="toc-finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" class="nav-link" data-scroll-target="#finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game">Finally, the real deal, is there a programmatic way to win this game?</a></li>
+  <li><a href="#yes-and-no" id="toc-yes-and-no" class="nav-link" data-scroll-target="#yes-and-no">YES and NO</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -203,89 +205,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <hr>
-<section id="wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" class="level2">
-<h2 class="anchored" data-anchor-id="wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out">Wikispeedia: What does X have to do with Y? You better find out!</h2>
+<section id="wikispeedia-what-does-x-have-to-do-with-y-you-better-find-out" class="level1">
+<h1>Wikispeedia: What does X have to do with Y? You better find out!</h1>
 <p>Since the earliest records, humans have wandered across endless lands and walked thorugh mysterious paths, in an attempt to uncover the unexplored and find better conditions for their tribes. The rise of agriculture and the industrial era has, however, changed things, turning us into bare sedentary animals… until now!</p>
 <p><img src="images/heComputer.gif" class="img-fluid"></p>
-<p><a href="https://dlab.epfl.ch/wikispeedia/play/">Wikispeedia</a> is an easy and fun game: You are given two Wikipedia articles, and starting from the first article, your goal is to reach the second one exclusively by following links in the articles you encounter, effectively letting you explore your own paths across the vast wikipedia, for free! Your game data is collected by <a href="https://dlab.epfl.ch/">The EPFL Data Science Lab</a>, which helps us and them better understand some aspects of human behaviour 😉.</p>
-<p>Using this data, we ask ourselves, are there patterns in the way players navigate the network, that make them more successful? That is, are there any optimal strategy that doesn’t require extensive knowledge of the network?</p>
-<p>Players are faced with multiple stimulae during the playing session, and players’ decisions as well as their posterior success may be influenced by them. For example, users might navigate the network through <code>semantic similarity</code> optimization, or they might just click the links found in <code>images</code> or <code>tables</code>, etc.</p>
+<p><a href="https://dlab.epfl.ch/wikispeedia/play/">Wikispeedia</a> is an easy and fun game: you are given two Wikipedia articles, and starting from the first article, your goal is to reach the second one exclusively by clicking links in the articles you encounter, effectively letting you explore your own paths across the vast Wikipedia network, for free! Your game data is collected by <a href="https://dlab.epfl.ch/">The EPFL Data Science Lab</a>, which helps us and them better understand some aspects of human behaviour 😉.</p>
+<p>Using this data, we ask ourselves, are there patterns in the way players navigate the network, that make them more successful? That is, is there any optimal strategy that doesn’t require extensive knowledge of the network?</p>
+<p>Players are faced with multiple stimuli during the playing session, and players’ decisions as well as their subsequent success may be influenced by them. For example, users might navigate the network through <code>semantic similarity</code> optimization, or they might just click the links found in <code>images</code> or <code>tables</code>, etc.</p>
 <p>Do these particular features have any effect on players’ success? Let’s find out!</p>
 <hr>
-</section>
-<section id="a-look-into-the-collected-data" class="level2">
-<h2 class="anchored" data-anchor-id="a-look-into-the-collected-data">A look into the collected data…</h2>
-<div class="cell" data-execution_count="30">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look at the shortest_path distributions</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> pd.read_csv(<span class="st">'processed/final_df_curv_feats.csv'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>), </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">"hspace"</span>:<span class="fl">0.3</span>})</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.size"</span>] <span class="op">=</span> <span class="dv">12</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"shortest_path_length"</span>, </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                 ),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"shortest_path_length"</span>, </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">0</span>], </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)<span class="op">;</span> </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)<span class="op">;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"1. Optimal lengths of the proposed games."</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Count of human paths, stratified by shortest possible path")</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>) </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df.query(<span class="st">"shortest_path_length==4"</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"human_path_length"</span>, </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                 ),</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"human_path_length"</span>, </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">1</span>], </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Human path length'</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"2. Path lengths obtained by human players, when optimal length is 3."</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of human path lengths, with shortest possible path = 3");</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div id="data-distribs" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="datastory_files/figure-html/data-distribs-output-1.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">How are the data distributed among successful and unsuccessful games? We show: (top) The distributions of optimal lengths of the proposed games, and (bottom) The distributions of path lengths obtained by humans.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="players-as-humans" class="level2">
 <h2 class="anchored" data-anchor-id="players-as-humans">Players as humans</h2>
 <section id="strategies-and-attitudes" class="level3">
@@ -296,16 +224,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/Aesthetics.png" class="img-fluid"></p>
 <p>As “the Parthenon’s facade” showing a marvellous “interpretation of golden rectangles in its proportions” is judged to be aesthetically valuable by humans ability to discriminate at a sensory level, it is also true that <strong>visual content attracts human attention</strong> more than raw text.</p>
 <p>Additionally, picture yourself in a <strong>competitive framework</strong>, with a stopwatch in your left hand and your right trembling fingers on a mouse, determined to break down the shortest ever recorded Wikispeedia game and be remembered for eternity. Wouldn’t you click on <strong>top-positioned hyperlinks</strong> or would you parse the article in search for the best catch?</p>
-<div class="cell" data-source="https://radionotas.com/2021/04/16/10-errores-comunes-de-un-locutor-de-radio/" data-execution_count="33">
+<div class="cell" data-source="https://radionotas.com/2021/04/16/10-errores-comunes-de-un-locutor-de-radio/" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/stressed.jpg'</span>, width<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/stressed.jpg'</span>, width<span class="op">=</span><span class="dv">400</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="datastory_files/figure-html/cell-6-output-1.jpeg" class="img-fluid figure-img"></p>
+<p><img src="datastory_files/figure-html/cell-3-output-1.jpeg" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">In a competitive framework, players have the additional stress of finishing the game <em>fast</em>; information in an easily diggestible format, like images, provide an easy and quick shortcut to progress.</figcaption><p></p>
 </figure>
 </div>
@@ -313,57 +241,176 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="indeed-this-is-the-case-at-least-for-the-majority-of-players." class="level4">
 <h4 class="anchored" data-anchor-id="indeed-this-is-the-case-at-least-for-the-majority-of-players.">Indeed, this is the case, at least for the majority of players.</h4>
-<div class="cell" data-execution_count="35">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_img.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_img.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="datastory_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="datastory_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Players seem to be very attracted to links close to images (1 in the plot).</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The graphs can be read as follows: the heights of the columns represent a measure of how trendy the target behavior is among players; the left-sided column, per behavior, is the distribution among unsuccessful players, while the right-sided is the one among successful players.</p>
+<p>The graphs can be read as follows: the heights of the columns represent a measure of how trendy the target behavior is among players; the left-sided column, per behavior, is the distribution among unsuccessful players, while the right-sided is the one among successful players*.</p>
 <p>It is evident that clicking hyperlinks showing up in <strong>image captions</strong> is a <strong>trendy behavior</strong> for Wikispeedia players, especially among the <strong>successful</strong>. The rate of successful players clicking on images’ captions is roughly 4 times the unsuccessful players one.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_pos.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'images/Distribution_clickability_preference_pos.png'</span>, width<span class="op">=</span><span class="dv">500</span>,height<span class="op">=</span><span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<p><img src="datastory_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<p><img src="datastory_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>It is evident that clicking on hyperlinks showing up at the <strong>top of an article</strong> is largely trendier than clicking on hyperlinks elsewhere positioned in the article text (4 to 5 times more common). The gap between successful and unsuccesful players is not that large to show a pattern. It’ll be interesting to test!</p>
-<p>Next, a little trickier to understand: <strong>semantic similarity</strong>. Semantic similarity is a metric that evaluates the distance between items on the basis of the <strong>likeness of their meaning</strong> or semantic content. Humans at play, challenged to reach a target article, whereof the only information they’re provided with is a word or phrase, display common sense knowledge. They would, in fact, look for semantic <strong>relatedness</strong> in clicking the hyperlinks. Thinking of the <strong>hypertextual Wikipedia graph</strong> alone, it can be viewed as a primitive semantic <strong>network</strong>: articles represent the concepts and the hyperlinks are the means of connection between them. Two articles can be more or less “semantically related” if, naivly, the two “overlap” well, with regard to the words present in them and the way they are ordered or used in context.</p>
-<p>An illustration of the structure of the Wikispeedia hypertextual graph is shown in the image below (a part of it). The path between the source article “mathematics” to the target article “Alan Touring” is represented. The grey arrows connect nodes (i.e.&nbsp;hyperlinks) of a human path with length equal to 3, while the black arrows connect nodes of the shortest existing path between source and target articles, with length 2.</p>
+<p>Again, it is evident that clicking on hyperlinks showing up at the <strong>top of an article</strong> is largely trendier than clicking on hyperlinks elsewhere positioned in the article text (4 to 5 times more common). The gap between successful and unsuccesful players is not that large to show a pattern.</p>
+<p>However these are just <em>distributions</em>, i.e.&nbsp;a <strong>fair picture of reality</strong>, they show trends, no conclusions can be driven still. <br> *for a better understading of the graph (e.g.&nbsp;magnitudes of the column heights, units of measurements, etc.) see the notebook project_adalyzers.ipynb.</p>
 </section>
-</section>
-<section id="semantic-similarity-the-paths-that-make-sense." class="level3">
-<h3 class="anchored" data-anchor-id="semantic-similarity-the-paths-that-make-sense.">Semantic similarity: The paths that ‘make sense’.</h3>
-<p>An attitude it is reasonable to suppose players would perform, is to click on hyperlinks that are semantically closer and closer, along the human path, to the target article.</p>
-<div class="cell" data-execution_count="40">
+<section id="eye-catcher-hyperlinks-instinctual-urge-to-be-turned-down-or-smart-way-to-go" class="level4">
+<h4 class="anchored" data-anchor-id="eye-catcher-hyperlinks-instinctual-urge-to-be-turned-down-or-smart-way-to-go">Eye-catcher hyperlinks: instinctual urge to be turned down or smart way to go?</h4>
+<p>In addition to this crispy question, we ask you, dear reader, to wait some time more for the statistical inference you’re craving for, and dig a little deeper into human natural language structural traits.</p>
+<p>A little trickier to understand: <strong>semantic similarity</strong>. Semantic similarity is a metric that evaluates the distance between items on the basis of the <strong>likeness of their meaning</strong> or semantic content. Humans at play, challenged to reach a target article, whereof the only information they’re provided with is a word or phrase, display common sense knowledge. They would, in fact, look for semantic <strong>relatedness</strong> in clicking the hyperlinks. Thinking of the <strong>hypertextual Wikipedia graph</strong> alone, it can be viewed as a primitive semantic <strong>network</strong>: articles represent the concepts and the hyperlinks are the means of connection between them. Two articles can be more or less “semantically related” if, naivly, the two “overlap” well, with regard to the words present in them and the way they are ordered or used in context.</p>
+<p>An illustration of the structure of the Wikispeedia hypertextual graph is shown in the image below (a part of it). The path between the source article “mathematics” to the target article “Alan Touring” is pictured. The grey arrows connect nodes (i.e.&nbsp;hyperlinks) of a human path with length equal to 3, while the black arrows connect nodes of the shortest existing path between source and target articles, with length equal to 2.</p>
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"images/path.png"</span>, width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"images/path.png"</span>, width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="datastory_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="datastory_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">There are many ways of solving a puzzle. The optimal (black) doesn’t always make sense. A way for it to make sense is to click the article most similar to the current one (green path: sequential similarity increase), or click the article that is most similar to the target article (yellow path: target similarity increase). As shown by the intensity of the color, similarity increases in these paths as the player approaches the goal article.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>A smarter way is to click on articles linked by increasing similarity between two neighbouring along the path. These paths make sense, however, is this really the way the games are played? and, is this really effective?</p>
-<p>Let’s use the data to respond to some of these questions.</p>
-<p>Before we start, note that several <strong>confounders</strong> may affect the outcome of whatever analysis we do, in particular of the potential correlation between whatever features and success.</p>
-<p>A confounder may be the <strong>“difficulty”</strong> of the task. Two players can’t be compared if the comparison is too unfair, that is, if one user is given an easy task while the other is given a harder one no conclussion can be drawn: we need to find a way to make this even…</p>
+</section>
+<section id="semantic-similarity-the-paths-that-make-sense." class="level4">
+<h4 class="anchored" data-anchor-id="semantic-similarity-the-paths-that-make-sense.">Semantic similarity: the paths that ‘make sense’.</h4>
+<p>An attitude it is reasonable to suppose players would perform, is to click on hyperlinks that are semantically closer and closer, along the human path, to the target article. The yellow arrows visualize these weighted conncetions, a.k.a. distances evaluated with the semantic similarity metric.</p>
+<p>A smarter way could be to click on articles linked by increasing similarity between every two neighbouring along the path. The green arrows visualize the latters. <br></p>
+<p><strong>“These paths make sense, however, is this really the way the games are played? Is this actually effective w.r.t. success?”</strong></p>
+<p>Let us explore the data and answer to these questions.</p>
+</section>
+</section>
+</section>
+<section id="a-look-into-the-collected-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-look-into-the-collected-data">A look into the collected data…</h2>
+<p>What data do we have though? How hard are the tasks our brave users had to overcome? Let’s quickly explore this.</p>
+</section>
+</section>
+<section id="jeff-add-interesting-visualizationscrispy-distributions-you-got-from-the-exploration-of-the-data" class="level1">
+<h1>JEFF add interesting visualizations/crispy distributions you got from the exploration of the data</h1>
+<section id="maybe-explain-less-naively-the-semantic-similarity-metric-optional" class="level4">
+<h4 class="anchored" data-anchor-id="maybe-explain-less-naively-the-semantic-similarity-metric-optional">maybe explain less naively the semantic similarity metric (optional)</h4>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look at the shortest_path distributions</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>final_df <span class="op">=</span> pd.read_csv(<span class="st">'processed/final_df_curv_feats.csv'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">1</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                       figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">8</span>), </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                       gridspec_kw<span class="op">=</span>{<span class="st">"hspace"</span>:<span class="fl">0.3</span>})</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"font.size"</span>] <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"shortest_path_length"</span>, </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"shortest_path_length"</span>, </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">0</span>], </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)<span class="op">;</span> </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)<span class="op">;</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"1. Optimal lengths of the proposed games."</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Count of human paths, stratified by shortest possible path")</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'Absolute Counts'</span>) </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'Shortest Path'</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>(final_df.query(<span class="st">"shortest_path_length==4"</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>                  .groupby([<span class="st">"human_path_length"</span>, </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"is_successful"</span>])[<span class="st">'path'</span>]</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                  .count()</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>                  .reset_index()</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                 ),</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span><span class="st">"path"</span>, </span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span><span class="st">"human_path_length"</span>, </span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">"is_successful"</span>,</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>            ax<span class="op">=</span>ax[<span class="dv">1</span>], </span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>            palette<span class="op">=</span>[<span class="st">"#b2df8a"</span>, <span class="st">"#1f78b4"</span>])</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlim(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">'Absolute Counts'</span>)</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'Human path length'</span>)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"2. Path lengths obtained by human players, when optimal length is 4."</span>)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of human path lengths, with shortest possible path = 3");</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="data-distribs" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="datastory_files/figure-html/data-distribs-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">How are the data distributed among successful and unsuccessful games? We show: (top) The distributions of optimal lengths of the proposed games, and (bottom) The distributions of path lengths obtained by humans.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The graphs reveal some interesting features of the <strong>Wikispeedia hypertextual graph</strong> and the <strong>humans navigability network</strong>. The first plot shows the distribution of the shortest path distance of the tasks assigned to players.<br>
+The second plot shows the length of the actual paths taken by humans, on the subset with shortest path distance equal to 4. Given that the shortest path distance is taken as a proxy to game difficulty (see Section <em>A matching study</em>): - the distribution of the difficulty of games peaks at length equal to 3 and ranges from 2 to 5; - there exist hyperlinks which are not connected to any other; - as difficulty increases, the class unbalance decreases; - the distribution of successful human paths (with fixed shortest path distance == 4) spreads to a wide range of values, non monotously. - the distribution of unsuccessful paths (with fixed shortest path distance == 4) is severely skewed to the left and peaks at 3, meaning that in such paths, players give up before even having a chance to win.</p>
+<p>More <em>down-to-Earth</em>: the <strong>distribution of optimal path lengths</strong> and the <strong>distribution of human path lengths</strong> are <strong>uneven</strong> and significantly <strong>vary for the populations</strong> of successful vs unsuccessful players. <br> These conclusions bring us to look for features of the games possibly affecting players performances (a.k.a. covariates), leading them to behave so inhomogeneously.</p>
+</section>
+<section id="a-closer-look-into-the-collected-data-hunt-for-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="a-closer-look-into-the-collected-data-hunt-for-covariates">A closer look into the collected data: hunt for covariates</h2>
+<section id="graph-theoretical-features" class="level4">
+<h4 class="anchored" data-anchor-id="graph-theoretical-features">Graph-theoretical features</h4>
+<p>To characterize a path, we can describe each clicked link (i.e.&nbsp;each piece of the path, a.k.a. node of the graph), in the context of the Wikispeedia network. What do we mean by this? Consider the articles “<em>United States of America</em>” and “<em>Bernard Hinault</em>”. The first one is one of most influential country on the world: intuitively it has a lot of other articles pointing to it, and also links to a lot other articles. The second is… well, less known. Way less known. Our friend here is, although one of the greatest cyclist in history, part of a very narrow context, in the context of the Wikispeedia network.</p>
+<p>If we manage to reach “<em>United States of America</em>”, we have big chances of reaching any other article, as it’s well connected, while if we ever reach “<em>Bernard Hinault</em>”, the paths we take may be longer.</p>
+<div class="cell" data-execution_count="66">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"images/curv_example.png"</span>, width<span class="op">=</span><span class="dv">600</span>, height<span class="op">=</span><span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="datastory_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Curvature describes the context of the links that are clicked, within the network. If we click a link with a high curvature, we’re in a very well connected part of the network. Matching by this quantity ensures that users are exploring similar regions of the wikipedia network, and thus allows us to make fair comparisons.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To put this into numbers, we quantify the <strong>curvature</strong> of each edge (clickable link in an article) in the path. This quantifies the ammount of “flow potential” of a node (article). If an article has many ways in and many ways out, then its curvature is very negative, however if the ways in (or the ways out) are too few, we might have encountered a bottle neck, with a curvature closer to 0.</p>
+<p>So, if the input node is <code>i</code>, and the output node is <code>j</code>, the curvature is calculated as follows:</p>
+<p><br> <font size="4"> <span class="math display">\[\begin{align*}
+F(_\rightarrow e_\rightarrow) &amp;= 2 - in(i) - out(j)
+\end{align*}\]</span> </font> <br></p>
+<p>All the features listed make the Wikispeedia hypertextual graph clumpy and the addressed comparisons above unfair (we did it on purpose to show you that when your granny warned you not to judge people by their appearance, she was right!).</p>
+<p>In statystical terms: these are <strong>observed covariates</strong> that we will leverage to remove the <strong>confounders</strong> that may affect the outcome of the logistic regression analysis we’re aiming at conducting in order to find a potential correlation between the strategies/attitudes performed by players and their success.</p>
+<p>To state it more clearly, the shortest path distance between the source and target article in the Wikispeedia hyperlinks graph can be viewed as a measure of the <strong>“difficulty”</strong> of the randomly assigned task (source and target articles), affecting both the players’ successfulness and the strategy adopted to address it (a.k.a. confounder); this is a <em>static feature</em>. Furthermore, depending on the users’ choices, the task can become harder or easier as the game develops (<em>dynamic feature</em>): this trait can be captured by the, path dependent, features hyperlinks’ in- and out- degrees.</p>
+<p>As we wish to compare only similar paths, these features will be exploited to restrict the inquiry on paths with a certain degree of <strong>“similarity”</strong> between themselves.</p>
+</section>
 </section>
 </section>
 <section id="a-matching-study" class="level1">
@@ -378,112 +425,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>increasing semantic similarity along the path between two sequentially clicked articles.</li>
 </ul></li>
 </ol>
-<p>As explained, the main confounder here is the game difficulty. Note that this is not only determined by the proposition of the task (that is, the source and target articles), but it’s a dynamic thing: depending on the users’ choices, the task can become harder or easier as the game develops. Thus, to fairly compare different paths in terms of difficulty, we need to generate more features, that are path dependent, and not only dependent on the endpoints.</p>
-<section id="graph-theoretical-features" class="level2">
-<h2 class="anchored" data-anchor-id="graph-theoretical-features">Graph-theoretical features</h2>
-<p>To describe a path, we can describe each link clicked (i.e.&nbsp;each piece of the path), in the context of the wikipedia network. What do we mean by this? Consider the articles “<em>United States of America</em>” and “<em>Bernard Hinault</em>”. The first one is one of the countries with the most impact on the world, intuitively it has a lot of other articles pointing to it, and also links to a lot other articles.</p>
-<p>The second is… well, less known. Way less known. Our friend here is, although one of the greatest cyclist in history, part of a very narrow context, in the context of the wikipedia network. If we manage to reach “<em>United States of America</em>”, we have big chances of reaching any other article, as it’s well connected, while if we ever reach “<em>Bernard Hinault</em>”, the paths we take may be longer.</p>
-<p>To put this into numbers, we quantify the <strong>edge curvature</strong> of each edge (link) in the path. This quantifies the ammount of “flow potential” of a link. If a link has many ways in and many ways out, then its curvature is very negative, however if the ways in (or the ways out) are too few, we might have encountered a bottle neck, with a curvature closer to 0.</p>
-<p><br> <font size="4"> <span class="math display">\[\begin{align*}
-F(_\rightarrow e_\rightarrow) &amp;= 2 - in(i) - out(j)
-\end{align*}\]</span> </font> <br></p>
-<p>Using features based on this, we can now easily compare if two users took similar paths, regardless of which articles were given as a task; this allows a more general matching.</p>
-<p>In order to remove the aforementioned confounders, the dataset is filtered and the matching is performed accordingly with the assumptions made. Players are matched on same shortest path distance of the assigned task, and maximum <strong>propensity score</strong>, with the <strong>treated subject</strong> being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the <strong>controlled subject</strong> being the user NOT performing the strategy.</p>
+<p>In order to remove the aforementioned confounders, the dataset is filtered and the matching is performed accordingly with the assumptions made. Players are matched on same shortest path distance of the assigned task, and maximum <strong>propensity score</strong>. The propensity scores are obtained by calculating the <strong>predicted outcomes of a logistic regression</strong> with the outcome being the <em>probability of treatment</em> and the predictors being <em>features of the human paths</em>. The <strong>treated subject</strong> being the user performing a specific strategy (e.g.&nbsp;clicking more frequently than the average on hyperlinks showing up in images’ captions) and the <strong>controlled subject</strong> being the user NOT performing the strategy.</p>
+<p>The players tested are now on the <strong>same starting point when choosing what strategy to adopt</strong>.</p>
 <p>The analysis challenge can be reformulated as follows: <em><strong>“being assigned an equally difficult task and being equally free to perform a specific strategy, are players more successful if they adopt that specific strategy?”</strong></em></p>
-</section>
-<section id="calculation-of-propensity-score" class="level2">
-<h2 class="anchored" data-anchor-id="calculation-of-propensity-score">Calculation of propensity score</h2>
-<p>The purpose motivating the matched analysis is to obtain a “balanced” testing dataset, with subjects actually comparable. In fact, we want to test potential correlation (causation ?) between specific strategies performed and players’ success. The players tested should then be at the <strong>same starting point</strong> when choosing what strategy to adopt, i.e.&nbsp;have same probability to get the treatment (a.k.a. propensity score).</p>
-<p>The propensity scores are obtained by calculating the <strong>predicted outcomes of a logistic regression</strong> with the outcome being the <em>probability of treatment</em> and the predictors being <em>features of the human paths</em>. The <strong>treated subject</strong> is the <em>user performing the specific strategy</em>, the <strong>controlled subjct</strong> is the user <em>NOT performing the specific startegy</em>.</p>
-<section id="logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
-<section id="finally-lets-test-if-theres-a-programmatic-way-to-win-this-game" class="level4">
-<h4 class="anchored" data-anchor-id="finally-lets-test-if-theres-a-programmatic-way-to-win-this-game">Finally, let’s test if there’s a programmatic way to win this game!!</h4>
-<p>A logistic regression analysis is conducted with the outcome being players’ success in the game and the predictors being the strategies performed by the players.</p>
-<div class="cell" data-execution_count="64">
+<section id="finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game" class="level3">
+<h3 class="anchored" data-anchor-id="finally-the-real-deal-is-there-a-programmatic-way-to-win-this-game">Finally, the real deal, is there a programmatic way to win this game?</h3>
+<div class="cell" data-execution_count="65">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> highlight_rows(row):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> row.loc[<span class="st">"p-value"</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#FFB3BA'</span> <span class="co"># Red</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#BAFFC9'</span> <span class="co"># Green</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">'background-color: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(color) <span class="cf">for</span> r <span class="kw">in</span> row]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> (pd.read_csv(<span class="st">"images/results_matching.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>              .loc[[<span class="st">"Coefficient"</span>, <span class="st">"Coefficient p-value"</span>]]</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>              .T)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>results_df.columns <span class="op">=</span> [<span class="st">"Coefficient"</span>, <span class="st">"p-value"</span>]</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>(results_df</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a> .sort_values(by<span class="op">=</span><span class="st">"p-value"</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a> .style</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a> .<span class="bu">apply</span>(highlight_rows, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> highlight_rows(row):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    value <span class="op">=</span> row.loc[<span class="st">"p-value"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#FFB3BA'</span> <span class="co"># Red</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> value <span class="op">&lt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'#BAFFC9'</span> <span class="co"># Green</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">'background-color: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(color) <span class="cf">for</span> r <span class="kw">in</span> row]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> (pd.read_csv(<span class="st">"images/results_matching.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>              .loc[[<span class="st">"Coefficient"</span>, <span class="st">"Coefficient p-value"</span>]]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>              .T)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>results_df.columns <span class="op">=</span> [<span class="st">"Coefficient"</span>, <span class="st">"p-value"</span>]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>(results_df</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a> .sort_values(by<span class="op">=</span><span class="st">"p-value"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a> .style</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a> .<span class="bu">apply</span>(highlight_rows, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="65">
 
 <style type="text/css">
-#T_34f23_row0_col0, #T_34f23_row0_col1, #T_34f23_row1_col0, #T_34f23_row1_col1 {
+#T_3e9e4_row0_col0, #T_3e9e4_row0_col1, #T_3e9e4_row1_col0, #T_3e9e4_row1_col1 {
   background-color: #BAFFC9;
 }
-#T_34f23_row2_col0, #T_34f23_row2_col1, #T_34f23_row3_col0, #T_34f23_row3_col1, #T_34f23_row4_col0, #T_34f23_row4_col1, #T_34f23_row5_col0, #T_34f23_row5_col1 {
+#T_3e9e4_row2_col0, #T_3e9e4_row2_col1, #T_3e9e4_row3_col0, #T_3e9e4_row3_col1, #T_3e9e4_row4_col0, #T_3e9e4_row4_col1, #T_3e9e4_row5_col0, #T_3e9e4_row5_col1 {
   background-color: #FFB3BA;
 }
 </style>
-<table id="T_34f23">
+<table id="T_3e9e4">
   <thead>
     <tr>
       <th class="blank level0">&nbsp;</th>
-      <th id="T_34f23_level0_col0" class="col_heading level0 col0">Coefficient</th>
-      <th id="T_34f23_level0_col1" class="col_heading level0 col1">p-value</th>
+      <th id="T_3e9e4_level0_col0" class="col_heading level0 col0">Coefficient</th>
+      <th id="T_3e9e4_level0_col1" class="col_heading level0 col1">p-value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_34f23_level0_row0" class="row_heading level0 row0">target_strictly_increasing</th>
-      <td id="T_34f23_row0_col0" class="data row0 col0">0.331702</td>
-      <td id="T_34f23_row0_col1" class="data row0 col1">0.000369</td>
+      <th id="T_3e9e4_level0_row0" class="row_heading level0 row0">target_strictly_increasing</th>
+      <td id="T_3e9e4_row0_col0" class="data row0 col0">0.331702</td>
+      <td id="T_3e9e4_row0_col1" class="data row0 col1">0.000369</td>
     </tr>
     <tr>
-      <th id="T_34f23_level0_row1" class="row_heading level0 row1">used_bottom</th>
-      <td id="T_34f23_row1_col0" class="data row1 col0">-0.480309</td>
-      <td id="T_34f23_row1_col1" class="data row1 col1">0.029248</td>
+      <th id="T_3e9e4_level0_row1" class="row_heading level0 row1">used_bottom</th>
+      <td id="T_3e9e4_row1_col0" class="data row1 col0">-0.480309</td>
+      <td id="T_3e9e4_row1_col1" class="data row1 col1">0.029248</td>
     </tr>
     <tr>
-      <th id="T_34f23_level0_row2" class="row_heading level0 row2">seq_strictly_increasing</th>
-      <td id="T_34f23_row2_col0" class="data row2 col0">0.185502</td>
-      <td id="T_34f23_row2_col1" class="data row2 col1">0.335804</td>
+      <th id="T_3e9e4_level0_row2" class="row_heading level0 row2">seq_strictly_increasing</th>
+      <td id="T_3e9e4_row2_col0" class="data row2 col0">0.185502</td>
+      <td id="T_3e9e4_row2_col1" class="data row2 col1">0.335804</td>
     </tr>
     <tr>
-      <th id="T_34f23_level0_row3" class="row_heading level0 row3">used_top</th>
-      <td id="T_34f23_row3_col0" class="data row3 col0">-0.187462</td>
-      <td id="T_34f23_row3_col1" class="data row3 col1">0.358632</td>
+      <th id="T_3e9e4_level0_row3" class="row_heading level0 row3">used_top</th>
+      <td id="T_3e9e4_row3_col0" class="data row3 col0">-0.187462</td>
+      <td id="T_3e9e4_row3_col1" class="data row3 col1">0.358632</td>
     </tr>
     <tr>
-      <th id="T_34f23_level0_row4" class="row_heading level0 row4">used_center_bottom</th>
-      <td id="T_34f23_row4_col0" class="data row4 col0">-0.107463</td>
-      <td id="T_34f23_row4_col1" class="data row4 col1">0.604242</td>
+      <th id="T_3e9e4_level0_row4" class="row_heading level0 row4">used_center_bottom</th>
+      <td id="T_3e9e4_row4_col0" class="data row4 col0">-0.107463</td>
+      <td id="T_3e9e4_row4_col1" class="data row4 col1">0.604242</td>
     </tr>
     <tr>
-      <th id="T_34f23_level0_row5" class="row_heading level0 row5">used_count_images</th>
-      <td id="T_34f23_row5_col0" class="data row5 col0">-0.016091</td>
-      <td id="T_34f23_row5_col1" class="data row5 col1">0.876319</td>
+      <th id="T_3e9e4_level0_row5" class="row_heading level0 row5">used_count_images</th>
+      <td id="T_3e9e4_row5_col0" class="data row5 col0">-0.016091</td>
+      <td id="T_3e9e4_row5_col1" class="data row5 col1">0.876319</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
-<p>We test 6 different possible strategies, and we find that <strong>two</strong> of them have some effect in the outcome, namely <code>clicking links in the bottom of the page</code>, and <code>clicking to increase similarity to target</code> (as p-values for both show there’s a significant difference between populations). They have, however, opposite effects: the former has a negative coefficient, while the latter has a positive one, implying that clicking links in the bottom of the page has a significantly negative effect on the outcome of the game. <strong>SO DON’T DO THIS 😭</strong>.</p>
-<p>Additionally, non surprisingly images play no role in user’s success.</p>
-<p>The latter makes a lot of sense, though. This result also provides good evidence that there’s no shortcut to success in this game: If you wanna win in wikispeedia, you will (un)fortunately have to think hard!</p>
+</section>
+<section id="yes-and-no" class="level3">
+<h3 class="anchored" data-anchor-id="yes-and-no">YES and NO</h3>
+<p>We tested <strong>6</strong> different possible strategies, and we found that <strong>2</strong> of them impact the players’ successfulness, namely <code>clicking links in the bottom of the page</code>, and <code>clicking to increase similarity to target</code> (the significant p-values allow to infer a difference in the outcome between differently behaving populations players). Instead it is not possible to evaluate if the strategies <code>clicking links in image captions</code>, <code>clicking links in the top of the page</code>, <code>clicking links in the center-bottom of the page</code>, <code>clicking to increase similarity to next</code> give players an edge in the game.</p>
+<p><strong>These results well picture reality!</strong></p>
+<p>It is not surprising that clicking hyperliks in image captions doesn’t play a role in users’ success, still we proved they’re tempted to do it. Similarly for the attitude of clicking on hyperlinks located in peculiar positions of the article text. Unexpectedly, though, clicking links in the bottom of the webpage has a significantly negative effect on the outcome of the game. Even if we cannot justify by with common sense, we advise you <strong>NOT TO DO THIS 😭</strong>. Least but not last, <code>clicking to increase similarity to target</code> has proven to have a significantly positive impact on players’ success. We have good evidence that there’s no shortcut to success in this game: if you wanna win in Wikispeedia game, you will (un)fortunately have to think hard!</p>
+<p><strong>In the end we’ll let you, dear reader, judge if to be happy with the result that common sense actually makes sense or toi be sad with the finding that there’s no way to cheat common sense.</strong></p>
 
 
-</section>
-</section>
 </section>
 </section>
 
